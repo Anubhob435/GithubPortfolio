@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anubhob's GitHub Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons8-github-500.png') }}">
+</head>
+<body class="light-mode">
+    <!-- Social Media Sidebar -->
+    <div class="social-sidebar">
+        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/icons8-github-500.png') }}" alt="GitHub Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#joinme">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <button id="theme-toggle-btn" title="Toggle dark/light mode">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="container">
+            <div class="home-content">
+                <div class="home-text">
+                    <span class="github-badge">Developer</span>
+                    <h1>Hi, I'm Anubhob Dey <span class="wave">👋</span></h1>
+                    <div class="github-bio">
+                        <p><i class="fas fa-code"></i> B. Tech Student | Software Developer</p>
+                        <p><i class="fas fa-lightbulb"></i> Focused on Software Development and Machine Learning</p>
+                        <p><i class="fas fa-project-diagram"></i> Turning ideas into functional code</p>
+                        <p><i class="fas fa-chart-line"></i> Always learning, always growing</p>
+                    </div>
+                    <div class="github-stats">
+                        <div class="stat-item">
+                            <span class="stat-count">XX</span>
+                            <span class="stat-label">Repositories</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-count">XX</span>
+                            <span class="stat-label">Contributions</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-count">XX</span>
+                            <span class="stat-label">Stars</span>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn primary-btn"><i class="fas fa-code-branch"></i> View Projects</a>
+                        <a href="#joinme" class="btn secondary-btn"><i class="fas fa-user-plus"></i> Connect</a>
+                    </div>
+                </div>
+                <div class="profile-pic">
+                    <img src="{{ url_for('static', filename='images/profile-pic.jpg') }}" alt="Anubhob's Profile">
+                    <div class="status-badge">Available for hire</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="{{ url_for('static', filename='images/about-img.jpg') }}" alt="Anubhob Working">
+                    <div class="commit-activity">
+                        <div class="commit-graph">
+                            <!-- Simulated GitHub contribution graph -->
+                            <div class="graph-row">
+                                <span class="graph-cell level-0"></span>
+                                <span class="graph-cell level-1"></span>
+                                <span class="graph-cell level-2"></span>
+                                <span class="graph-cell level-3"></span>
+                                <span class="graph-cell level-1"></span>
+                                <span class="graph-cell level-0"></span>
+                                <span class="graph-cell level-2"></span>
+                            </div>
+                            <div class="graph-row">
+                                <span class="graph-cell level-2"></span>
+                                <span class="graph-cell level-3"></span>
+                                <span class="graph-cell level-4"></span>
+                                <span class="graph-cell level-2"></span>
+                                <span class="graph-cell level-1"></span>
+                                <span class="graph-cell level-3"></span>
+                                <span class="graph-cell level-0"></span>
+                            </div>
+                        </div>
+                        <p class="commit-text">Consistent contributor</p>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <div class="readme-container">
+                        <div class="readme-header">
+                            <h3><i class="far fa-file-alt"></i> README.md</h3>
+                        </div>
+                        <div class="readme-content">
+                            <p>I am a passionate software developer with a strong foundation in computer science and a desire to create impactful applications.</p>
+                            <p>My journey in technology began several years ago, and since then, I've been constantly learning and improving my skills to stay at the forefront of innovation.</p>
+                            <p>I enjoy solving complex problems and collaborating with teams to build efficient and elegant solutions. When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.</p>
+                            <p>I believe in clean code, user-centered design, and continuous improvement in everything I do.</p>
+                            <div class="tech-stack">
+                                <p><strong>🔧 Tech Stack:</strong></p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Flask</span>
+                                    <span class="tech-tag">Docker</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-timeline">
+                <div class="education-item">
+                    <div class="education-year">2020-Present</div>
+                    <div class="education-content">
+                        <h3>B. Tech in Computer Science & Engineering (AI & ML)</h3>
+                        <p>University of Engineering and Management, Kolkata, WB</p>
+                        <p>CGPA: 8.43/10</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2020-2022</div>
+                    <div class="education-content">
+                        <h3>Senior Secondary</h3>
+                        <p>B. D. M. International, Kolkata, WB</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2018-2020</div>
+                    <div class="education-content">
+                        <h3>Secondary</h3>
+                        <p>B. D. M. International, Kolkata, WB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-overview">
+                <p class="skills-intro"><i class="fas fa-book-reader"></i> Continuously expanding my skill set through self-learning, formal education, and hands-on projects. My technical abilities span multiple domains with a focus on software development and data engineering.</p>
+            </div>
+            
+            <div class="skills-container">
+                <!-- Core Technologies Category -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Core Technologies</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%"></div>
+                            </div>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Java</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Unix/Linux</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Web Development Category -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-globe"></i>
+                        <h3>Web Development</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Flask</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">RESTful APIs</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Engineering & ML Category -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>Data Engineering & ML</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">TensorFlow</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Web Scraping</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%"></div>
+                            </div>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Data Pipeline Design</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Computer Vision</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">OpenCV</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Database Systems Category -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-database"></i>
+                        <h3>Database Systems</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MySQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Oracle</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Database Design</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL Optimization</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DevOps & Cloud Category -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-cloud"></i>
+                        <h3>DevOps & Cloud</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Docker</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Google Cloud</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Microsoft Azure</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">AWS S3</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">CI/CD</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Technical Skills Category -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-tools"></i>
+                        <h3>Other Technical Skills</h3>
+                    </div>
+                    <div class="skill-grid">
+                        <span class="tech-badge"><i class="fas fa-robot"></i> Automation</span>
+                        <span class="tech-badge"><i class="fas fa-code-branch"></i> Git</span>
+                        <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+                        <span class="tech-badge"><i class="fas fa-laptop-code"></i> Code Refactoring</span>
+                        <span class="tech-badge"><i class="fas fa-shield-alt"></i> Data Security</span>
+                        <span class="tech-badge"><i class="fas fa-project-diagram"></i> System Architecture</span>
+                        <span class="tech-badge"><i class="fas fa-tasks"></i> Agile Methods</span>
+                        <span class="tech-badge"><i class="fas fa-tachometer-alt"></i> Performance Optimization</span>
+                        <span class="tech-badge"><i class="fas fa-bug"></i> Debugging</span>
+                        <span class="tech-badge"><i class="fas fa-users-cog"></i> Team Management</span>
+                        <span class="tech-badge"><i class="fas fa-microchip"></i> Raspberry Pi</span>
+                        <span class="tech-badge"><i class="fas fa-sitemap"></i> API Design</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Summary -->
+            <div class="skills-summary">
+                <h3><i class="fas fa-star"></i> Areas of Expertise</h3>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <div class="expertise-icon"><i class="fas fa-robot"></i></div>
+                        <h4>Automation</h4>
+                        <p>Specializing in process automation with Python, creating efficient workflows that save time and reduce errors.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon"><i class="fas fa-database"></i></div>
+                        <h4>Data Engineering</h4>
+                        <p>Designing robust data pipelines and efficient database solutions for complex data processing needs.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon"><i class="fas fa-brain"></i></div>
+                        <h4>AI Integration</h4>
+                        <p>Implementing practical AI solutions in real-world applications with a focus on usability and performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-year">
+                        <span class="date-badge">January 2025 – Present</span>
+                        <div class="experience-duration">4 months</div>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Data Engineer for AI Model Training</h3>
+                            <span class="company-badge"><i class="fas fa-building"></i> Legal Gini</span>
+                        </div>
+                        <p class="experience-location"><i class="fas fa-map-marker-alt"></i> Remote</p>
+                        <div class="experience-description">
+                            <p>Working on data engineering solutions for AI model training, focusing on efficient data collection, processing, and storage.</p>
+                        </div>
+                        <div class="key-achievements">
+                            <h4><i class="fas fa-trophy"></i> Key Achievements</h4>
+                            <ul class="experience-accomplishments">
+                                <li>
+                                    <span class="achievement-highlight">50% increased efficiency</span>
+                                    <p>Designed a web crawler using Python and Selenium for improved data mining operations</p>
+                                </li>
+                                <li>
+                                    <span class="achievement-highlight">500% workflow speed boost</span>
+                                    <p>Engineered an automated data pipeline with parallel processing capabilities</p>
+                                </li>
+                                <li>
+                                    <span class="achievement-highlight">24/7 monitoring</span>
+                                    <p>Deployed an AI agent for real-time workflow log monitoring providing instant feedback</p>
+                                </li>
+                                <li>
+                                    <span class="achievement-highlight">Optimized training process</span>
+                                    <p>Enhanced vectorization and data upload to AWS S3 Buckets for faster model training</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tech-used">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Selenium</span>
+                            <span class="tech-tag">AWS S3</span>
+                            <span class="tech-tag">Parallel Processing</span>
+                            <span class="tech-tag">AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- Featured Projects -->
+            <div class="featured-projects">
+                <div class="project-card featured">
+                    <div class="project-image">
+                        <div class="project-badge">Featured Project</div>
+                        <div class="image-placeholder">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">
+                                Enhanced School Bus Safety with GPS Tracking
+                            </h3>
+                            <div class="project-links">
+                                
+                                <span class="project-status">In Progress</span>
+                            </div>
+                        </div>
+                        <p class="project-description">A comprehensive real-time GPS tracking solution designed to enhance student safety during transportation with robust monitoring capabilities.</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">40ms</span>
+                                <span class="metric-label">Latency</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">50+</span>
+                                <span class="metric-label">Users</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">256-bit</span>
+                                <span class="metric-label">Encryption</span>
+                            </div>
+                        </div>
+                        <div class="project-details">
+                            <h4><i class="fas fa-tasks"></i> Key Features</h4>
+                            <ul class="project-features">
+                                <li><i class="fas fa-check-circle"></i> Real-time GPS tracking system with minimal latency for accurate location data</li>
+                                <li><i class="fas fa-check-circle"></i> Scalable Google Cloud infrastructure supporting multiple simultaneous users</li>
+                                <li><i class="fas fa-check-circle"></i> End-to-end encryption ensuring maximum data security for student information</li>
+                                <li><i class="fas fa-check-circle"></i> AI-driven monitoring for real-time alerts and notifications</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Google Cloud</span>
+                                <span class="tech-tag">GPS API</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">TensorFlow</span>
+                            </div>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-timeline">
+                                <i class="far fa-calendar-alt"></i> August 2024 - Ongoing
+                            </div>
+                            <div class="project-team">
+                                <i class="fas fa-users"></i> Group Project
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card featured">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">
+                                Automated Web Scraping Pipeline
+                            </h3>
+                            <div class="project-links">
+                                <span class="project-status completed">Completed</span>
+                            </div>
+                        </div>
+                        <p class="project-description">An advanced data pipeline for automated web scraping with intelligent processing capabilities and multiple data format support.</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">99.9%</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">10%</span>
+                                <span class="metric-label">Faster Reads</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">7s</span>
+                                <span class="metric-label">reCAPTCHA Bypass</span>
+                            </div>
+                        </div>
+                        <div class="project-details">
+                            <h4><i class="fas fa-tasks"></i> Key Achievements</h4>
+                            <ul class="project-features">
+                                <li><i class="fas fa-check-circle"></i> Robust data pipeline with Selenium, Scrapy, and Beautiful Soup with near-perfect uptime</li>
+                                <li><i class="fas fa-check-circle"></i> Optimized data preprocessing algorithms for faster data access and processing</li>
+                                <li><i class="fas fa-check-circle"></i> AI-powered reCAPTCHA bypass system for uninterrupted data collection</li>
+                                <li><i class="fas fa-check-circle"></i> Multi-format data extraction supporting text, graphs, tables, and AI-summarized reports</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Selenium</span>
+                                <span class="tech-tag">Scrapy</span>
+                                <span class="tech-tag">Beautiful Soup</span>
+                                <span class="tech-tag">TensorFlow</span>
+                            </div>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-timeline">
+                                <i class="far fa-calendar-alt"></i> August 2024 - September 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card featured">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-hands"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">
+                                Real-Time Sign Language Translator
+                            </h3>
+                            <div class="project-links">
+                                <span class="project-status completed">Completed</span>
+                            </div>
+                        </div>
+                        <p class="project-description">An accessible sign language translation system optimized for real-time performance and accuracy on resource-constrained devices.</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">30%</span>
+                                <span class="metric-label">Memory Reduction</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">70%</span>
+                                <span class="metric-label">Faster Inference</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">20ms</span>
+                                <span class="metric-label">Response Time</span>
+                            </div>
+                        </div>
+                        <div class="project-details">
+                            <h4><i class="fas fa-tasks"></i> Key Developments</h4>
+                            <ul class="project-features">
+                                <li><i class="fas fa-check-circle"></i> Custom-designed sign language model with enhanced accuracy for real-world scenarios</li>
+                                <li><i class="fas fa-check-circle"></i> TensorFlow Lite optimization for resource-efficient deployment on edge devices</li>
+                                <li><i class="fas fa-check-circle"></i> Raspberry Pi integration for portable, low-latency translation capabilities</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">TensorFlow Lite</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Raspberry Pi</span>
+                                <span class="tech-tag">OpenCV</span>
+                                <span class="tech-tag">Machine Learning</span>
+                            </div>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-timeline">
+                                <i class="far fa-calendar-alt"></i> January 2024 - May 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="github-projects-title">Other GitHub Projects</h3>
+            <div class="projects-grid" id="projects-container">
+                <!-- Projects will be loaded dynamically from GitHub API -->
+                <div class="loading">Loading projects...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-grid">
+                <div class="certification-card">
+                    <div class="certification-header">
+                        <div class="certification-logo harvard">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="certification-issuer">
+                            <h4>Harvard University</h4>
+                            <span class="cert-date">June 2024</span>
+                        </div>
+                    </div>
+                    <div class="certification-content">
+                        <h3>CS50x: Introduction to Computer Science</h3>
+                        <p class="cert-description">A comprehensive introduction to computer science covering algorithms, data structures, resource management, software engineering, and web development.</p>
+                        <div class="cert-skills">
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Web Dev</span>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certification-card">
+                    <div class="certification-header">
+                        <div class="certification-logo harvard">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="certification-issuer">
+                            <h4>Harvard University</h4>
+                            <span class="cert-date">October 2024</span>
+                        </div>
+                    </div>
+                    <div class="certification-content">
+                        <h3>CS50p: Introduction to Python Programming</h3>
+                        <p class="cert-description">An in-depth course covering Python programming concepts, data structures, and problem-solving using Python's powerful libraries and frameworks.</p>
+                        <div class="cert-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">OOP</span>
+                            <span class="skill-tag">API</span>
+                            <span class="skill-tag">Libraries</span>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certification-card">
+                    <div class="certification-header">
+                        <div class="certification-logo udemy">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="certification-issuer">
+                            <h4>Udemy</h4>
+                            <span class="cert-date">November 2024</span>
+                        </div>
+                    </div>
+                    <div class="certification-content">
+                        <h3>The Complete 2024 Web Development Bootcamp</h3>
+                        <p class="cert-description">A comprehensive course covering modern web development technologies, frameworks, and best practices for building responsive and dynamic web applications.</p>
+                        <div class="cert-skills">
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certification-card">
+                    <div class="certification-header">
+                        <div class="certification-logo linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="certification-issuer">
+                            <h4>LinkedIn Learning</h4>
+                            <span class="cert-date">April 2024</span>
+                        </div>
+                    </div>
+                    <div class="certification-content">
+                        <h3>Java Object Oriented Programming</h3>
+                        <p class="cert-description">A specialized course focusing on object-oriented programming principles and patterns in Java, covering inheritance, polymorphism, encapsulation, and abstraction.</p>
+                        <div class="cert-skills">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">OOP</span>
+                            <span class="skill-tag">Design Patterns</span>
+                            <span class="skill-tag">Best Practices</span>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership & Awards Section -->
+    <section id="leadership" class="section">
+        <div class="container">
+            <h2 class="section-title">Leadership, Interests & Awards</h2>
+            
+            <div class="achievements-tabs">
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-target="leadership-tab">
+                        <i class="fas fa-users"></i> Leadership
+                    </button>
+                    <button class="tab-btn" data-target="awards-tab">
+                        <i class="fas fa-trophy"></i> Awards
+                    </button>
+                    <button class="tab-btn" data-target="interests-tab">
+                        <i class="fas fa-heart"></i> Interests
+                    </button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Leadership Tab -->
+                    <div class="tab-pane active" id="leadership-tab">
+                        <div class="leadership-showcase">
+                            <div class="achievement-card featured-achievement">
+                                <div class="achievement-header">
+                                    <div class="achievement-icon mentor">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="achievement-title">
+                                        <h3>Volunteer Teaching Assistant</h3>
+                                        <span class="achievement-org">Shiksha Sabke Liye NGO</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-body">
+                                    <p class="achievement-description">Mentored 50+ students in programming and computer science concepts, focusing on making technology education accessible to underserved communities.</p>
+                                    <div class="achievement-highlights">
+                                        <div class="highlight-item">
+                                            <span class="highlight-value">50+</span>
+                                            <span class="highlight-label">Students</span>
+                                        </div>
+                                        <div class="highlight-item">
+                                            <span class="highlight-value">8</span>
+                                            <span class="highlight-label">Months</span>
+                                        </div>
+                                    </div>
+                                    <div class="achievement-tags">
+                                        <span class="activity-tag">Teaching</span>
+                                        <span class="activity-tag">Mentorship</span>
+                                        <span class="activity-tag">Community Service</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-card">
+                                <div class="achievement-header">
+                                    <div class="achievement-icon environment">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <div class="achievement-title">
+                                        <h3>Climate Action Fundraising Lead</h3>
+                                        <span class="achievement-org">Green (R)evolution Organization</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-body">
+                                    <p class="achievement-description">Led fundraising initiatives focused on climate change awareness and action, coordinating a team of volunteers to organize events and outreach programs.</p>
+                                    <div class="achievement-tags">
+                                        <span class="activity-tag">Leadership</span>
+                                        <span class="activity-tag">Fundraising</span>
+                                        <span class="activity-tag">Environment</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Awards Tab -->
+                    <div class="tab-pane" id="awards-tab">
+                        <div class="awards-showcase">
+                            <div class="achievement-card featured-achievement">
+                                <div class="achievement-header">
+                                    <div class="achievement-icon award">
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="achievement-title">
+                                        <h3>"Tech Wizard of the Year"</h3>
+                                        <span class="achievement-date">December 2024</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-body">
+                                    <p class="achievement-description">Recognized for outstanding innovation, technical excellence, and leadership in developing software solutions that address real-world problems.</p>
+                                    <div class="achievement-quote">
+                                        <blockquote>
+                                            "Demonstrating exceptional technical skill and innovative thinking in creating impactful technology solutions."
+                                        </blockquote>
+                                        <cite>— Award Committee</cite>
+                                    </div>
+                                    <div class="achievement-tags">
+                                        <span class="activity-tag">Technical Excellence</span>
+                                        <span class="activity-tag">Innovation</span>
+                                        <span class="activity-tag">Leadership</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Add more awards here if you have any -->
+                        </div>
+                    </div>
+                    
+                    <!-- Interests Tab -->
+                    <div class="tab-pane" id="interests-tab">
+                        <div class="interests-showcase">
+                            <div class="interest-grid">
+                                <div class="interest-card">
+                                    <div class="interest-icon">
+                                        <i class="fas fa-chess-knight"></i>
+                                    </div>
+                                    <div class="interest-content">
+                                        <h4>Chess</h4>
+                                        <p>Founded a local chess club for seniors to promote mental acuity and community interaction. Regularly participate in tournaments and teach beginners.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="interest-card">
+                                    <div class="interest-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="interest-content">
+                                        <h4>Reading</h4>
+                                        <p>Avid reader of technical books, science fiction, and philosophy. Currently exploring works on artificial intelligence ethics and future technology trends.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="interest-card">
+                                    <div class="interest-icon">
+                                        <i class="fas fa-hiking"></i>
+                                    </div>
+                                    <div class="interest-content">
+                                        <h4>Hiking</h4>
+                                        <p>Enjoy exploring nature trails and mountains. Completed several challenging treks and looking forward to more outdoor adventures.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="interest-card">
+                                    <div class="interest-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div class="interest-content">
+                                        <h4>Open Source</h4>
+                                        <p>Passionate about contributing to open-source projects that make technology more accessible and solve real-world problems.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Me Section -->
+    <section id="joinme" class="section">
+        <div class="container">
+            <h2 class="section-title">Join Me</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3><i class="fas fa-comments"></i> Let's Discuss Your Project</h3>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>+91 9830332228</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>anubhob.dey2022@uem.edu.in</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Kolkata, WB, India</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-social">
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <div class="contact-form">
+                        <h3>Would Love to Chat About Projects and Ideas</h3>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or idea" required></textarea>
+                            </div>
+                            <button type="submit" class="btn primary-btn">Send Message</button>
+                        </form>
+                        <div id="form-response" class="hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ year }} Anubhob. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
