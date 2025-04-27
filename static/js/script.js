@@ -22,8 +22,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Typing animation for the home section
+    initTypewriter();
+    
     // Simulate GitHub stats
     simulateGitHubStats();
+    
+    // Resume Button Functionality
+    const resumeBtn = document.getElementById('resume-btn');
+    if (resumeBtn) {
+        resumeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Resume download functionality will be integrated here!');
+        });
+    }
     
     // Smooth Scrolling for Navigation Links
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
@@ -40,6 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Scroll indicator functionality
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            const aboutSection = document.querySelector('#about');
+            if (aboutSection) {
+                window.scrollTo({
+                    top: aboutSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Hide scroll indicator on scroll
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        });
+    }
     
     // Fetch GitHub Projects
     fetchGithubProjects();
@@ -86,6 +121,55 @@ document.addEventListener('DOMContentLoaded', function() {
     animateContributionGraph();
 });
 
+// Typewriter effect function
+function initTypewriter() {
+    const typingTextElement = document.getElementById('typing-text');
+    if (!typingTextElement) return;
+    
+    const phrases = [
+        "Software Developer",
+        "Data Engineer",
+        "AI Enthusiast",
+        "Problem Solver",
+        "Web Developer"
+    ];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+    
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isDeleting) {
+            typingTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            typingSpeed = 50; // faster when deleting
+        } else {
+            typingTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+            typingSpeed = 150; // slower when typing
+        }
+        
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            // Pause at the end of typing
+            isDeleting = true;
+            typingSpeed = 1000; // wait before deleting
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            // Move to the next phrase
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typingSpeed = 500; // pause before typing next phrase
+        }
+        
+        setTimeout(type, typingSpeed);
+    }
+    
+    // Start the typing effect
+    setTimeout(type, 1000);
+}
+
 // Function to initialize tab navigation
 function initTabNavigation() {
     const tabButtons = document.querySelectorAll('.tab-btn');
@@ -115,15 +199,40 @@ function initTabNavigation() {
     }
 }
 
-// Function to simulate GitHub stats
+// Function to simulate GitHub stats with animation
 function simulateGitHubStats() {
-    const repositories = document.querySelector('.stat-count:nth-child(1)');
-    const contributions = document.querySelector('.stat-count:nth-child(1) + .stat-label + .stat-count');
-    const stars = document.querySelector('.stat-count:nth-child(1) + .stat-label + .stat-count + .stat-label + .stat-count');
+    const repoCount = document.getElementById('repo-count');
+    const contribCount = document.getElementById('contrib-count');
+    const starCount = document.getElementById('star-count');
     
-    if (repositories) repositories.textContent = Math.floor(Math.random() * 30) + 10; // 10-40 repos
-    if (contributions) contributions.textContent = Math.floor(Math.random() * 500) + 200; // 200-700 contributions
-    if (stars) stars.textContent = Math.floor(Math.random() * 100) + 50; // 50-150 stars
+    function animateValue(element, start, end, duration) {
+        if (!element) return;
+        
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value;
+            
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        
+        window.requestAnimationFrame(step);
+    }
+    
+    // Random values for demo purposes
+    const repos = Math.floor(Math.random() * 30) + 15; // 15-45 repos
+    const contributions = Math.floor(Math.random() * 700) + 300; // 300-1000 contributions
+    const stars = Math.floor(Math.random() * 150) + 50; // 50-200 stars
+    
+    setTimeout(() => {
+        animateValue(repoCount, 0, repos, 1500);
+        animateValue(contribCount, 0, contributions, 2000);
+        animateValue(starCount, 0, stars, 1800);
+    }, 500);
 }
 
 // Function to animate contribution graph
