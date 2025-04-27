@@ -88,7 +88,7 @@
                     <div class="cta-buttons">
                         <a href="#projects" class="btn primary-btn"><i class="fas fa-code-branch"></i> View Projects</a>
                         <a href="#joinme" class="btn secondary-btn"><i class="fas fa-user-plus"></i> Connect</a>
-                        <a href="#" class="btn outline-btn" id="resume-btn"><i class="fas fa-file-alt"></i> Resume</a>
+                        <a href="{{ url_for('static', filename='images/anubhob_dey_cv3.pdf') }}" class="btn outline-btn" id="resume-btn"><i class="fas fa-file-alt"></i> Resume</a>
                     </div>
                 </div>
                 <div class="profile-container">
@@ -435,6 +435,11 @@
                         <div class="expertise-icon"><i class="fas fa-brain"></i></div>
                         <h4>AI Integration</h4>
                         <p>Implementing practical AI solutions in real-world applications with a focus on usability and performance.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon"><i class="fas fa-pencil-ruler"></i></div>
+                        <h4>Efficient Design</h4>
+                        <p>Creating elegant, scalable architectures with emphasis on performance optimization and resource efficiency.</p>
                     </div>
                 </div>
             </div>
@@ -954,67 +959,169 @@
     <!-- Join Me Section -->
     <section id="joinme" class="section">
         <div class="container">
-            <h2 class="section-title">Join Me</h2>
+            <div class="section-header-special">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Open for collaborations, freelance opportunities, or just a tech chat</p>
+            </div>
+            
+            <div class="connection-overview">
+                <div class="availability-indicator">
+                    <div class="availability-badge">
+                        <span class="pulse-dot"></span>
+                        <span class="availability-text">Available for new opportunities</span>
+                    </div>
+                    <p class="availability-details">Currently accepting projects starting <strong>May 2025</strong></p>
+                </div>
+            </div>
+            
             <div class="contact-container">
                 <div class="contact-info">
                     <div class="contact-card">
-                        <h3><i class="fas fa-comments"></i> Let's Discuss Your Project</h3>
+                        <div class="card-header">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Let's Build Something Amazing</h3>
+                        </div>
+                        
+                        <div class="contact-pitch">
+                            <p>Whether you need a custom solution for your business, technical consultation, or want to discuss potential collaborations, I'm just a message away.</p>
+                        </div>
+                        
                         <div class="contact-details">
                             <div class="contact-item">
                                 <i class="fas fa-phone-alt"></i>
                                 <div>
                                     <h4>Phone</h4>
                                     <p>+91 9830332228</p>
+                                    <span class="best-time">Best time: 10am - 6pm IST</span>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-envelope"></i>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>anubhob.dey2022@uem.edu.in</p>
+                                    <p><a href="mailto:anubhob.dey2022@uem.edu.in">anubhob.dey2022@uem.edu.in</a></p>
+                                    <span class="response-time">Typical response: Within 24 hours</span>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h4>Location</h4>
-                                    <p>Kolkata, WB, India</p>
+                                    <p>Kolkata, West Bengal, India</p>
+                                    <span class="timezone">Timezone: UTC+5:30</span>
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="preferred-projects">
+                            <h4><i class="fas fa-star"></i> Preferred Project Types</h4>
+                            <div class="project-tags">
+                                <span class="project-tag">Web Applications</span>
+                                <span class="project-tag">Data Engineering</span>
+                                <span class="project-tag">AI Integration</span>
+                                <span class="project-tag">Process Automation</span>
+                            </div>
+                        </div>
+                        
                         <div class="contact-social">
-                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <h4>Connect With Me</h4>
+                            <div class="social-links">
+                                <a href="#" class="social-link" title="GitHub Profile"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-link" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-link" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link" title="Dev.to Blog"><i class="fab fa-dev"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-form-container">
                     <div class="contact-form">
-                        <h3>Would Love to Chat About Projects and Ideas</h3>
+                        <div class="form-header">
+                            <i class="fas fa-paper-plane"></i>
+                            <h3>Send Me a Message</h3>
+                            <p>I'd love to hear about your project and how I can help.</p>
+                        </div>
+                        
                         <form id="contact-form">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Your name" required>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" placeholder="Your email" required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="Your email" required>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                                <input type="text" id="subject" name="subject" placeholder="What is this regarding?" required>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="project-type">Project Type</label>
+                                <select id="project-type" name="project-type">
+                                    <option value="" disabled selected>Select project type</option>
+                                    <option value="web-dev">Web Development</option>
+                                    <option value="data-eng">Data Engineering</option>
+                                    <option value="ai-ml">AI/ML Project</option>
+                                    <option value="consultation">Technical Consultation</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or idea" required></textarea>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, timeline, and expectations..." required></textarea>
                             </div>
-                            <button type="submit" class="btn primary-btn">Send Message</button>
+                            
+                            <div class="form-group form-checkbox">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <label for="consent">I agree to be contacted regarding my inquiry</label>
+                            </div>
+                            
+                            <button type="submit" class="btn primary-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
                         </form>
+                        
                         <div id="form-response" class="hidden"></div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="collaboration-cards">
+                <div class="collab-card">
+                    <div class="collab-icon"><i class="fas fa-code-branch"></i></div>
+                    <h3>Open Source</h3>
+                    <p>I'm passionate about contributing to open source. If you have a project that needs contributors, let's talk!</p>
+                </div>
+                <div class="collab-card">
+                    <div class="collab-icon"><i class="fas fa-users"></i></div>
+                    <h3>Mentorship</h3>
+                    <p>Interested in learning programming or data engineering? I'm open to mentoring opportunities.</p>
+                </div>
+                <div class="collab-card">
+                    <div class="collab-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Innovation</h3>
+                    <p>Have a challenging technical problem? I enjoy tackling unique problems with creative solutions.</p>
+                </div>
+            </div>
+            
+            <div class="testimonials-preview">
+                <div class="testimonial-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <blockquote>Anubhob's technical skills and problem-solving abilities made our project a success. Highly recommended for any data engineering task.</blockquote>
+                    <cite>— Project Manager at Legal Gini</cite>
+                </div>
+            </div>
+            
+            <div class="cta-final">
+                <a href="{{ url_for('static', filename='images/anubhob_dey_cv3.pdf') }}" class="btn outline-btn" target="_blank">
+                    <i class="fas fa-file-download"></i> Download Resume
+                </a>
             </div>
         </div>
     </section>
