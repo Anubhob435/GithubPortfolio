@@ -2,10 +2,10 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/your-gcp-project-id/cloudrun/githubportfolio:$COMMIT_SHA', '.'] # Replace region and project ID
+  args: ['build', '-t', '[REGION]-docker.pkg.dev/[PROJECT-ID]/cloudrun/githubportfolio:$COMMIT_SHA', '.']
 # Push the container image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/your-gcp-project-id/cloudrun/githubportfolio:$COMMIT_SHA'] # Replace region and project ID
+  args: ['push', '[REGION]-docker.pkg.dev/[PROJECT-ID]/cloudrun/githubportfolio:$COMMIT_SHA']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
@@ -13,9 +13,9 @@ steps:
     - 'run'
     - 'deploy'
     - 'githubportfolio' # Your Cloud Run service name
-    - '--image=us-central1-docker.pkg.dev/your-gcp-project-id/cloudrun/githubportfolio:$COMMIT_SHA' # Replace region and project ID
-    - '--region=us-central1' # Replace region
+    - '--image=[REGION]-docker.pkg.dev/[PROJECT-ID]/cloudrun/githubportfolio:$COMMIT_SHA'
+    - '--region=[REGION]'
     - '--platform=managed'
     - '--allow-unauthenticated'
 images:
-- 'us-central1-docker.pkg.dev/your-gcp-project-id/cloudrun/githubportfolio:$COMMIT_SHA' # Replace region and project ID
+- '[REGION]-docker.pkg.dev/[PROJECT-ID]/cloudrun/githubportfolio:$COMMIT_SHA'
