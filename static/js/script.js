@@ -27,15 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Simulate GitHub stats
     simulateGitHubStats();
-    
-    // Resume Button Functionality
+      // Resume Button Functionality
     const resumeBtn = document.getElementById('resume-btn');
-    if (resumeBtn) {
-        resumeBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Resume download functionality will be integrated here!');
-        });
-    }
+    // Resume download will now work through the native browser download
     
     // Smooth Scrolling for Navigation Links
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
