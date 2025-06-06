@@ -115,6 +115,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animate contribution graph cells
     animateContributionGraph();
+      // Profile Picture Toggle Functionality
+    const profilePicInner = document.querySelector('.profile-pic-inner');
+    
+    if (profilePicInner) {
+        let isClicked = false;
+        
+        profilePicInner.addEventListener('click', function() {
+            isClicked = !isClicked;
+            
+            if (isClicked) {
+                this.classList.add('clicked', 'flipped');
+            } else {
+                this.classList.remove('clicked', 'flipped');
+            }
+        });
+    }
 });
 
 // Typewriter effect function
