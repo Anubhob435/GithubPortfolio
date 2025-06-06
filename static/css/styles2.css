@@ -204,6 +204,38 @@ body.dark-mode .education-card {
     color: #1971c2;
 }
 
+/* University Logo Styling */
+.university-logo {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.university-logo img {
+    width: 100px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 5px solid var(--border-color);
+    background-color: white;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .university-logo img {
+    border-color: #30363d;
+    background-color: #21262d;
+}
+
+.university-logo img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .university-logo img:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 /* School/University */
 .education-school {
     display: flex;

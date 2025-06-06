@@ -1919,6 +1919,38 @@ body.dark-mode .project-forks {
     color: var(--accent-color);
 }
 
+/* Company Logo Styling */
+.company-logo {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.company-logo img {
+    width: 100px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 5px solid var(--border-color);
+    background-color: white;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .company-logo img {
+    border-color: #30363d;
+    background-color: #21262d;
+}
+
+.company-logo img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .company-logo img:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .experience-location {
     font-size: 0.9rem;
     color: var(--text-muted);
