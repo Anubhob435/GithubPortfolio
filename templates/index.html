@@ -315,9 +315,7 @@
             </div>
         </div>
     </div>
-</section>
-
-    <!-- Skills Section -->
+</section>    <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title">Skills & Expertise</h2>
@@ -325,102 +323,101 @@
                 <p class="skills-intro"><i class="fas fa-book-reader"></i> Continuously expanding my skill set through self-learning, formal education, and hands-on projects. My technical abilities span multiple domains with a focus on software development and data engineering.</p>
             </div>
             
-            <div class="skills-container">
-                <!-- Core Technologies Category -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-layer-group"></i>
-                        <h3>Core Technologies</h3>
-                    </div>
-                    <div class="skill-grid">
-                        <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
-                        <span class="tech-badge"><i class="fab fa-java"></i> Java</span>
-                        <span class="tech-badge"><i class="fas fa-code"></i> C</span>
-                        <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-                        <span class="tech-badge"><i class="fas fa-database"></i> SQL</span>
-                        <span class="tech-badge"><i class="fab fa-linux"></i> Unix/Linux</span>
-                    </div>
+            <div class="skills-tabs">
+                <div class="skills-navigation">
+                    <button class="skill-tab-btn active" data-target="core-technologies">
+                        <i class="fas fa-layer-group"></i> Core Technologies
+                    </button>
+                    <button class="skill-tab-btn" data-target="web-development">
+                        <i class="fas fa-globe"></i> Web Development
+                    </button>
+                    <button class="skill-tab-btn" data-target="data-ml">
+                        <i class="fas fa-brain"></i> Data Engineering & ML
+                    </button>
+                    <button class="skill-tab-btn" data-target="database-systems">
+                        <i class="fas fa-database"></i> Database Systems
+                    </button>
+                    <button class="skill-tab-btn" data-target="devops-cloud">
+                        <i class="fas fa-cloud"></i> DevOps & Cloud
+                    </button>
+                    <button class="skill-tab-btn" data-target="other-skills">
+                        <i class="fas fa-tools"></i> Other Technical Skills
+                    </button>
                 </div>
                 
-                <!-- Web Development Category -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-globe"></i>
-                        <h3>Web Development</h3>
+                <div class="skills-tab-content">
+                    <!-- Core Technologies Tab -->
+                    <div class="skill-tab-pane active" id="core-technologies">
+                        <div class="skill-grid">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fab fa-java"></i> Java</span>
+                            <span class="tech-badge"><i class="fas fa-code"></i> C</span>
+                            <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="tech-badge"><i class="fas fa-database"></i> SQL</span>
+                            <span class="tech-badge"><i class="fab fa-linux"></i> Unix/Linux</span>
+                        </div>
                     </div>
-                    <div class="skill-grid">
-                        <span class="tech-badge"><i class="fab fa-html5"></i> HTML/CSS</span>
-                        <span class="tech-badge"><i class="fab fa-react"></i> React</span>
-                        <span class="tech-badge"><i class="fas fa-flask"></i> Flask</span>
-                        <span class="tech-badge"><i class="fab fa-node-js"></i> Node.js</span>
-                        <span class="tech-badge"><i class="fas fa-exchange-alt"></i> RESTful APIs</span>
+                    
+                    <!-- Web Development Tab -->
+                    <div class="skill-tab-pane" id="web-development">
+                        <div class="skill-grid">
+                            <span class="tech-badge"><i class="fab fa-html5"></i> HTML/CSS</span>
+                            <span class="tech-badge"><i class="fab fa-react"></i> React</span>
+                            <span class="tech-badge"><i class="fas fa-flask"></i> Flask</span>
+                            <span class="tech-badge"><i class="fab fa-node-js"></i> Node.js</span>
+                            <span class="tech-badge"><i class="fas fa-exchange-alt"></i> RESTful APIs</span>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Data Engineering & ML Category -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-brain"></i>
-                        <h3>Data Engineering & ML</h3>
+                    
+                    <!-- Data Engineering & ML Tab -->
+                    <div class="skill-tab-pane" id="data-ml">
+                        <div class="skill-grid">
+                            <span class="tech-badge"><i class="fas fa-network-wired"></i> TensorFlow</span>
+                            <span class="tech-badge"><i class="fas fa-spider"></i> Web Scraping</span>
+                            <span class="tech-badge"><i class="fas fa-project-diagram"></i> Data Pipeline Design</span>
+                            <span class="tech-badge"><i class="fas fa-eye"></i> Computer Vision</span>
+                            <span class="tech-badge"><i class="fas fa-camera"></i> OpenCV</span>
+                        </div>
                     </div>
-                    <div class="skill-grid">
-                        <span class="tech-badge"><i class="fas fa-network-wired"></i> TensorFlow</span>
-                        <span class="tech-badge"><i class="fas fa-spider"></i> Web Scraping</span>
-                        <span class="tech-badge"><i class="fas fa-project-diagram"></i> Data Pipeline Design</span>
-                        <span class="tech-badge"><i class="fas fa-eye"></i> Computer Vision</span>
-                        <span class="tech-badge"><i class="fas fa-camera"></i> OpenCV</span>
+                    
+                    <!-- Database Systems Tab -->
+                    <div class="skill-tab-pane" id="database-systems">
+                        <div class="skill-grid">
+                            <span class="tech-badge"><i class="fas fa-leaf"></i> MongoDB</span>
+                            <span class="tech-badge"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="tech-badge"><i class="fas fa-server"></i> Oracle</span>
+                            <span class="tech-badge"><i class="fas fa-sitemap"></i> Database Design</span>
+                            <span class="tech-badge"><i class="fas fa-tachometer-alt"></i> SQL Optimization</span>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Database Systems Category -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-database"></i>
-                        <h3>Database Systems</h3>
+                    
+                    <!-- DevOps & Cloud Tab -->
+                    <div class="skill-tab-pane" id="devops-cloud">
+                        <div class="skill-grid">
+                            <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
+                            <span class="tech-badge"><i class="fab fa-google"></i> Google Cloud</span>
+                            <span class="tech-badge"><i class="fab fa-microsoft"></i> Microsoft Azure</span>
+                            <span class="tech-badge"><i class="fab fa-aws"></i> AWS S3</span>
+                            <span class="tech-badge"><i class="fas fa-sync-alt"></i> CI/CD</span>
+                        </div>
                     </div>
-                    <div class="skill-grid">
-                        <span class="tech-badge"><i class="fas fa-leaf"></i> MongoDB</span>
-                        <span class="tech-badge"><i class="fas fa-database"></i> MySQL</span>
-                        <span class="tech-badge"><i class="fas fa-server"></i> Oracle</span>
-                        <span class="tech-badge"><i class="fas fa-sitemap"></i> Database Design</span>
-                        <span class="tech-badge"><i class="fas fa-tachometer-alt"></i> SQL Optimization</span>
-                    </div>
-                </div>
-                
-                <!-- DevOps & Cloud Category -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-cloud"></i>
-                        <h3>DevOps & Cloud</h3>
-                    </div>
-                    <div class="skill-grid">
-                        <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
-                        <span class="tech-badge"><i class="fab fa-google"></i> Google Cloud</span>
-                        <span class="tech-badge"><i class="fab fa-microsoft"></i> Microsoft Azure</span>
-                        <span class="tech-badge"><i class="fab fa-aws"></i> AWS S3</span>
-                        <span class="tech-badge"><i class="fas fa-sync-alt"></i> CI/CD</span>
-                    </div>
-                </div>
-                
-                <!-- Other Technical Skills Category -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-tools"></i>
-                        <h3>Other Technical Skills</h3>
-                    </div>
-                    <div class="skill-grid">
-                        <span class="tech-badge"><i class="fas fa-robot"></i> Automation</span>
-                        <span class="tech-badge"><i class="fas fa-code-branch"></i> Git</span>
-                        <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
-                        <span class="tech-badge"><i class="fas fa-laptop-code"></i> Code Refactoring</span>
-                        <span class="tech-badge"><i class="fas fa-shield-alt"></i> Data Security</span>
-                        <span class="tech-badge"><i class="fas fa-project-diagram"></i> System Architecture</span>
-                        <span class="tech-badge"><i class="fas fa-tasks"></i> Agile Methods</span>
-                        <span class="tech-badge"><i class="fas fa-tachometer-alt"></i> Performance Optimization</span>
-                        <span class="tech-badge"><i class="fas fa-bug"></i> Debugging</span>
-                        <span class="tech-badge"><i class="fas fa-users-cog"></i> Team Management</span>
-                        <span class="tech-badge"><i class="fas fa-microchip"></i> Raspberry Pi</span>
-                        <span class="tech-badge"><i class="fas fa-sitemap"></i> API Design</span>
+                    
+                    <!-- Other Technical Skills Tab -->
+                    <div class="skill-tab-pane" id="other-skills">
+                        <div class="skill-grid">
+                            <span class="tech-badge"><i class="fas fa-robot"></i> Automation</span>
+                            <span class="tech-badge"><i class="fas fa-code-branch"></i> Git</span>
+                            <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+                            <span class="tech-badge"><i class="fas fa-laptop-code"></i> Code Refactoring</span>
+                            <span class="tech-badge"><i class="fas fa-shield-alt"></i> Data Security</span>
+                            <span class="tech-badge"><i class="fas fa-project-diagram"></i> System Architecture</span>
+                            <span class="tech-badge"><i class="fas fa-tasks"></i> Agile Methods</span>
+                            <span class="tech-badge"><i class="fas fa-tachometer-alt"></i> Performance Optimization</span>
+                            <span class="tech-badge"><i class="fas fa-bug"></i> Debugging</span>
+                            <span class="tech-badge"><i class="fas fa-users-cog"></i> Team Management</span>
+                            <span class="tech-badge"><i class="fas fa-microchip"></i> Raspberry Pi</span>
+                            <span class="tech-badge"><i class="fas fa-sitemap"></i> API Design</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -514,13 +511,10 @@
             <h2 class="section-title">Projects</h2>
             
             <!-- Featured Projects -->
-            <div class="featured-projects">
-                <div class="project-card featured">
+            <div class="featured-projects">                <div class="project-card featured">
                     <div class="project-image">
                         <div class="project-badge">Featured Project</div>
-                        <div class="image-placeholder">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
+                        <img src="{{ url_for('static', filename='images/trackbeez.png') }}" alt="GPS Tracking System" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-header">
@@ -577,12 +571,9 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="project-card featured">
+                  <div class="project-card featured">
                     <div class="project-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-robot"></i>
-                        </div>
+                        <img src="{{ url_for('static', filename='images/ai_pipeline.png') }}" alt="Web Scraping Pipeline" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-header">                            <h3 class="project-title">
@@ -635,12 +626,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                  <div class="project-card featured">
+                </div>                  <div class="project-card featured">
                     <div class="project-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
+                        <img src="{{ url_for('static', filename='images/Midpay.png') }}" alt="MidPay Escrow System" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-header">                            <h3 class="project-title">
@@ -694,12 +682,9 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="project-card featured">
+                  <div class="project-card featured">
                     <div class="project-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
+                        <img src="{{ url_for('static', filename='images/IPLpredictor.png') }}" alt="IPL Match Outcome Predictor" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-header">                            <h3 class="project-title">

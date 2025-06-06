@@ -54,7 +54,7 @@ body.dark-mode {
 .container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 16px;
 }
 
 .section {
@@ -918,92 +918,64 @@ body.dark-mode .skill-bar {
     margin-right: 8px;
 }
 
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+.skills-tabs {
+    margin-top: 2rem;
 }
 
-.skill-category {
-    background-color: var(--light-bg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--border-color);
-    padding: 25px;
-    transition: all 0.3s ease;
-    height: 100%;
-}
-
-body.dark-mode .skill-category {
-    background-color: #161b22;
-    border-color: #30363d;
-}
-
-.skill-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-}
-
-.category-header {
+.skills-navigation {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.category-header i {
-    font-size: 1.8rem;
-    color: var(--secondary-color);
-}
-
-.category-header h3 {
-    font-size: 1.3rem;
-    color: var(--heading-color);
-    margin: 0;
-}
-
-.skill-item {
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-}
-
-.skill-name {
-    flex: 0 0 120px;
+.skill-tab-btn {
+    background: none;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
     font-weight: 500;
-    color: var (--text-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border-color);
 }
 
-.skill-bar {
-    flex: 1;
-    height: 10px;
-    background-color: #ebedf0;
-    border-radius: 5px;
-    overflow: hidden;
-    margin: 0 10px;
+.skill-tab-btn i {
+    font-size: 1.1rem;
 }
 
-.skill-level {
-    height: 100%;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-    transition: width 1s ease-in-out;
+.skill-tab-btn:hover {
+    background: var(--hover-bg);
+    transform: translateY(-2px);
 }
 
-.skill-percentage {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    width: 40px;
-    text-align: right;
-    flex-shrink: 0;
+.skill-tab-btn.active {
+    background: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
 }
 
-body.dark-mode .skill-bar {
-    background-color: #21262d;
+.skills-tab-content {
+    position: relative;
+    min-height: 200px;
 }
 
-/* Tech Badge Grid for Other Technical Skills */
+.skill-tab-pane {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.skill-tab-pane.active {
+    display: block;
+}
+
+/* Tech Badge Grid for Skills */
 .skill-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -1134,14 +1106,25 @@ body.dark-mode .expertise-item {
 
 /* Responsive adjustments for skills section */
 @media (max-width: 992px) {
-    .skills-container {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    .skills-navigation {
+        gap: 0.8rem;
+    }
+    
+    .skill-tab-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 768px) {
-    .skills-container {
-        grid-template-columns: 1fr;
+    .skills-navigation {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .skill-tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
     }
     
     .expertise-grid {
@@ -1159,6 +1142,18 @@ body.dark-mode .expertise-item {
     
     .skill-percentage {
         margin-left: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .skills-navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .skill-tab-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -1873,7 +1868,7 @@ body.dark-mode .project-forks {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-right: 2rem;
+    margin-right: 1 rem;
 }
 
 .date-badge {

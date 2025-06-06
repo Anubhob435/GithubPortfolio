@@ -72,9 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Fetch GitHub Projects
     fetchGithubProjects();
-    
-    // Tab Navigation for Leadership, Interests & Awards Section
+      // Tab Navigation for Leadership, Interests & Awards Section
     initTabNavigation();
+    
+    // Skills Tab Navigation
+    initSkillsTabNavigation();
     
     // Contact Form Submission
     const contactForm = document.getElementById('contact-form');
@@ -346,4 +348,33 @@ function getLanguageColor(language) {
     };
     
     return colors[language] || '#8b949e'; // Default color
+}
+
+// Function to initialize skills tab navigation
+function initSkillsTabNavigation() {
+    const skillTabButtons = document.querySelectorAll('.skill-tab-btn');
+    
+    if (skillTabButtons.length > 0) {
+        skillTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all skill tab buttons and panes
+                document.querySelectorAll('.skill-tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.skill-tab-pane').forEach(pane => {
+                    pane.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get target pane and activate it
+                const targetId = button.getAttribute('data-target');
+                const targetPane = document.getElementById(targetId);
+                if (targetPane) {
+                    targetPane.classList.add('active');
+                }
+            });
+        });
+    }
 }
