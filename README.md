@@ -1,4 +1,4 @@
-# Anubhob's Portfolio Website
+## Github THEMED Portfolio Website
 
 This is the source code for Anubhob Dey's portfolio website. The website showcases Anubhob's skills, projects, and contact information. It also includes a chatbot named "Friday" that acts as a personal assistant.
 
