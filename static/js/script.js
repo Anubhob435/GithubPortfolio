@@ -393,4 +393,188 @@ function initSkillsTabNavigation() {
             });
         });
     }
+    
+    // Chat Widget Functionality
+    initChatWidget();
+}
+
+// Chat Widget Functions
+function initChatWidget() {
+    const chatBubble = document.getElementById('chat-bubble');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChatBtn = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const sendMessageBtn = document.getElementById('send-message');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Toggle chat window
+    chatBubble.addEventListener('click', function() {
+        chatWindow.classList.add('show');
+        chatInput.focus();
+    });
+    
+    // Close chat window
+    closeChatBtn.addEventListener('click', function() {
+        chatWindow.classList.remove('show');
+    });
+    
+    // Close chat when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!chatWindow.contains(e.target) && !chatBubble.contains(e.target)) {
+            chatWindow.classList.remove('show');
+        }
+    });
+    
+    // Send message functionality
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+            addMessage(message, 'user');
+            chatInput.value = '';
+            sendMessageBtn.disabled = true;
+            
+            // Show typing indicator
+            addTypingIndicator();
+            
+            // Send request to Flask backend
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                removeTypingIndicator();
+                addMessage(data.response, 'bot');
+                sendMessageBtn.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                removeTypingIndicator();
+                // Fallback to local response if server is unavailable
+                const botResponse = generateBotResponse(message);
+                addMessage(botResponse, 'bot');
+                sendMessageBtn.disabled = false;
+            });
+        }
+    }
+    
+    // Send message on button click
+    sendMessageBtn.addEventListener('click', sendMessage);
+    
+    // Send message on Enter key
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    
+    // Add message to chat
+    function addMessage(content, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${sender}-message`);
+        
+        const messageContent = document.createElement('div');
+        messageContent.classList.add('message-content');
+        messageContent.textContent = content;
+        
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Add typing indicator
+    function addTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.classList.add('message', 'bot-message', 'typing-indicator');
+        typingDiv.id = 'typing-indicator';
+        
+        const typingContent = document.createElement('div');
+        typingContent.classList.add('message-content', 'typing');
+        typingContent.innerHTML = '<span></span><span></span><span></span>';
+        
+        typingDiv.appendChild(typingContent);
+        chatMessages.appendChild(typingDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Remove typing indicator
+    function removeTypingIndicator() {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Generate bot responses
+    function generateBotResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+        
+        // Define response patterns
+        const responses = {
+            greeting: [
+                "Hello! I'm here to help you learn more about Anubhob's work and experience.",
+                "Hi there! Feel free to ask me anything about Anubhob's projects, skills, or background.",
+                "Hey! I'm Anubhob's AI assistant. What would you like to know?"
+            ],
+            projects: [
+                "Anubhob has worked on various projects including ML pipelines, web applications, and data analysis tools. You can check out the Projects section above for detailed information!",
+                "His notable projects include IPL predictor, Midpay, and TrackBeez. Each project showcases different aspects of his technical skills.",
+                "You can find all of Anubhob's projects in the Projects section. They cover areas like machine learning, web development, and data science."
+            ],
+            skills: [
+                "Anubhob is skilled in Python, Machine Learning, Web Development, Data Analysis, and more. Check out the Skills section for a comprehensive list!",
+                "His technical expertise includes programming languages like Python, frameworks like Flask and Django, and ML libraries like scikit-learn and TensorFlow.",
+                "You can see all of Anubhob's technical skills organized by category in the Skills section above."
+            ],
+            contact: [
+                "You can reach out to Anubhob via email at anubhob435@gmail.com or connect with him on LinkedIn and GitHub!",
+                "Feel free to use the contact form in the Contact section, or reach him directly through his social media links.",
+                "Anubhob is always open to discussing new opportunities and collaborations. Use the contact section to get in touch!"
+            ],
+            education: [
+                "Anubhob studied at the University of Engineering & Management. You can find more details in the Education section!",
+                "Check out the Education section to learn about Anubhob's academic background and achievements.",
+                "His educational journey is detailed in the Education section above."
+            ],
+            experience: [
+                "Anubhob has experience in machine learning, web development, and data analysis. You can see his work experience and projects throughout the portfolio!",
+                "His professional experience spans across different domains including AI/ML, web development, and data science.",
+                "Check out the various sections to learn about Anubhob's professional journey and technical expertise."
+            ],
+            default: [
+                "That's an interesting question! You can find more information about Anubhob in the different sections of this portfolio.",
+                "I'd be happy to help! Try asking about his projects, skills, education, or how to contact him.",
+                "Feel free to explore the portfolio sections above, or ask me about Anubhob's projects, skills, or background!",
+                "You can ask me about Anubhob's technical skills, projects, education, or how to get in touch with him."
+            ]
+        };
+        
+        // Determine response category
+        let category = 'default';
+        
+        if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+            category = 'greeting';
+        } else if (message.includes('project') || message.includes('work') || message.includes('portfolio')) {
+            category = 'projects';
+        } else if (message.includes('skill') || message.includes('technology') || message.includes('programming') || message.includes('language')) {
+            category = 'skills';
+        } else if (message.includes('contact') || message.includes('email') || message.includes('reach') || message.includes('connect')) {
+            category = 'contact';
+        } else if (message.includes('education') || message.includes('study') || message.includes('university') || message.includes('degree')) {
+            category = 'education';
+        } else if (message.includes('experience') || message.includes('background') || message.includes('career')) {
+            category = 'experience';
+        }
+        
+        // Return random response from category
+        const categoryResponses = responses[category];
+        return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
+    }
 }
