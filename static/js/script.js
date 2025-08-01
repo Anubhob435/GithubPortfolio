@@ -407,23 +407,58 @@ function initChatWidget() {
     const sendMessageBtn = document.getElementById('send-message');
     const chatMessages = document.getElementById('chat-messages');
     
-    // Toggle chat window
+    let isTransforming = false;
+    
+    // Transform bubble to chat window
     chatBubble.addEventListener('click', function() {
-        chatWindow.classList.add('show');
-        chatInput.focus();
+        if (isTransforming) return;
+        openChatWindow();
     });
     
-    // Close chat window
+    // Transform chat window back to bubble
     closeChatBtn.addEventListener('click', function() {
-        chatWindow.classList.remove('show');
+        if (isTransforming) return;
+        closeChatWindow();
     });
     
-    // Close chat when clicking outside
+    // Close chat when clicking outside (but not on the bubble itself)
     document.addEventListener('click', function(e) {
-        if (!chatWindow.contains(e.target) && !chatBubble.contains(e.target)) {
-            chatWindow.classList.remove('show');
+        const chatContainer = document.querySelector('.chat-container');
+        if (!chatContainer.contains(e.target) && chatWindow.classList.contains('show')) {
+            closeChatWindow();
         }
     });
+    
+    function openChatWindow() {
+        isTransforming = true;
+        chatBubble.classList.add('transforming');
+        
+        // Show chat window after bubble transformation starts
+        setTimeout(() => {
+            chatWindow.classList.add('show');
+            chatInput.focus();
+        }, 200);
+        
+        // Complete transformation
+        setTimeout(() => {
+            isTransforming = false;
+        }, 600);
+    }
+    
+    function closeChatWindow() {
+        isTransforming = true;
+        chatWindow.classList.remove('show');
+        
+        // Start bubble transformation back
+        setTimeout(() => {
+            chatBubble.classList.remove('transforming');
+        }, 300);
+        
+        // Complete transformation
+        setTimeout(() => {
+            isTransforming = false;
+        }, 700);
+    }
     
     // Send message functionality
     function sendMessage() {
