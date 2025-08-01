@@ -1196,7 +1196,8 @@
     <!-- Chat Widget -->
     <div class="chat-container">
         <div id="chat-bubble" class="chat-bubble">
-            <i class="fas fa-comments"></i>
+            <img src="{{ url_for('static', filename='images/chat_icon_light.png') }}" alt="Chat" class="chat-bubble-icon light-mode-icon">
+            <img src="{{ url_for('static', filename='images/chat_icon_dark.png') }}" alt="Chat" class="chat-bubble-icon dark-mode-icon">
         </div>
 
         <div id="chat-window" class="chat-window">

@@ -2783,6 +2783,8 @@ body.dark-mode .interest-card {
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation: pulse 2s infinite;
     transform-origin: center;
+    padding: 8px; /* Add padding to ensure circular shape */
+    overflow: hidden; /* Ensure content stays within circle */
 }
 
 .chat-bubble:hover:not(.transforming) {
@@ -2796,6 +2798,38 @@ body.dark-mode .interest-card {
     transition: all 0.3s ease;
 }
 
+.chat-bubble-icon {
+    width: 44px; /* Slightly smaller to fit within the padded bubble */
+    height: 44px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    object-fit: cover;
+    position: absolute; /* Position both icons in the same space */
+    border: none !important; /* Remove any border */
+    outline: none !important; /* Remove any outline */
+    background: transparent !important; /* Ensure no background */
+    box-shadow: none !important; /* Remove any shadow */
+    margin: 0 !important; /* Remove any margin */
+    padding: 0 !important; /* Remove any padding on the image itself */
+}
+
+/* Theme-aware icon display */
+.chat-bubble-icon.light-mode-icon {
+    display: block;
+}
+
+.chat-bubble-icon.dark-mode-icon {
+    display: none;
+}
+
+body.dark-mode .chat-bubble-icon.light-mode-icon {
+    display: none;
+}
+
+body.dark-mode .chat-bubble-icon.dark-mode-icon {
+    display: block;
+}
+
 .chat-bubble.transforming {
     animation: none;
     width: 350px;
@@ -2807,7 +2841,8 @@ body.dark-mode .interest-card {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
-.chat-bubble.transforming i {
+.chat-bubble.transforming i,
+.chat-bubble.transforming .chat-bubble-icon {
     opacity: 0;
     transform: scale(0);
 }
