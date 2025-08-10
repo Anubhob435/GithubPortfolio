@@ -4,9 +4,16 @@ import os
 import json
 from datetime import datetime
 from dotenv import load_dotenv
+import uuid
+from pymongo import MongoClient
 
 # Load environment variables
 load_dotenv()
+
+# Initialize MongoDB
+client = MongoClient(os.getenv('MONGODB_URI'))
+db = client['chatbot_db']
+conversations_collection = db['conversations']
 
 app = Flask(__name__)
 
@@ -152,86 +159,110 @@ def chat():
     if not user_message:
         return jsonify({'response': 'Please ask me something about Anubhob!'})
     
+    # Get user information for MongoDB storage
+    user_ip = request.environ.get('HTTP_X_FORWARDED_FOR', request.environ.get('REMOTE_ADDR', 'unknown'))
+    session_id = request.json.get('session_id', str(uuid.uuid4()))
+    group_id = request.json.get('group_id', 'portfolio_chat')
+    
     # Try to get Gemini response first
     gemini_response = gemini_chat.get_gemini_response(user_message)
     
+    bot_response = ""
+    
     if gemini_response:
-        return jsonify({'response': gemini_response})
-    
-    # Fallback to predefined responses if Gemini is unavailable
-    user_message_lower = user_message.lower()
-    
-    # Enhanced bot responses with more context about Anubhob
-    responses = {
-        'greeting': [
-            "Hello! I'm Anubhob's AI assistant. I can help you learn about his skills, projects, and experience. What would you like to know?",
-            "Hi there! Welcome to Anubhob's portfolio. Feel free to ask me about his technical background, projects, or how to get in touch!",
-            "Hey! I'm here to help you navigate through Anubhob's portfolio. Ask me anything about his work!"
-        ],
-        'projects': [
-            "Anubhob has several impressive projects: 🚀 TrackBeez (GPS tracking for school buses), 🤖 AI Web Scraping Pipeline, 💳 MidPay (blockchain escrow system), and 🏏 IPL Predictor (85% accuracy ML model). Each showcases different technical skills!",
-            "His notable projects include real-time GPS tracking systems, AI-powered data pipelines, blockchain payment solutions, and machine learning prediction models. Check out the Projects section for detailed technical information!",
-            "From ML algorithms to full-stack applications, Anubhob's projects demonstrate expertise in Python, TensorFlow, React, blockchain, and cloud technologies. Each project solves real-world problems!"
-        ],
-        'skills': [
-            "Anubhob's technical stack: 🐍 Python, 🤖 ML (TensorFlow, scikit-learn), 🌐 Web Dev (React, Flask, Node.js), 📊 Data Engineering, ☁️ Cloud (GCP, Azure, AWS), and 🔗 Blockchain. Plus Java, C, JavaScript, and multiple databases!",
-            "He excels in full-stack development, machine learning, data pipeline design, computer vision, automation, and system architecture. His skills span from low-level programming to AI integration!",
-            "Core expertise includes Python automation, ML model development, web applications, database design (MongoDB, MySQL), cloud deployment, and API development. Check the Skills section for the complete breakdown!"
-        ],
-        'contact': [
-            "📧 anubhob435@gmail.com | 📱 +91 8583005957 | 💼 LinkedIn: /in/anubhob-dey-05702714b/ | 🐙 GitHub: /Anubhob435 | 📍 Kolkata, India (UTC+5:30). You can also use the contact form below!",
-            "Anubhob is actively seeking new opportunities and collaborations! Best to reach him via email (responds quickly) or LinkedIn. He's open to discussing projects, freelance work, or just tech conversations!",
-            "Available for projects starting May 2025. Connect through email, LinkedIn, or GitHub. He specializes in web applications, data engineering, AI integration, and process automation!"
-        ],
-        'education': [
-            "🎓 University of Engineering & Management (UEM) graduate with computer science focus. Enhanced his education with Harvard CS50x, CS50p Python certification, Udemy Web Dev Bootcamp, and LinkedIn Java OOP certification!",
-            "Strong academic foundation from UEM combined with continuous learning through prestigious online courses. His education spans theoretical CS concepts to practical implementation skills!",
-            "UEM provided the foundation, but Anubhob's self-directed learning through Harvard, Udemy, and hands-on projects shaped his diverse technical expertise across multiple domains!"
-        ],
-        'experience': [
-            "Currently Data Engineer for AI Model Training at Legal Gini (Jan 2025-Present). Works on data pipelines, web scraping automation, AWS S3 integration, and parallel processing for AI model development!",
-            "Professional experience in ML model development, full-stack web applications, data analysis, and automation. His projects demonstrate real-world application across multiple technology stacks!",
-            "From university projects to professional data engineering role, Anubhob has built end-to-end solutions including GPS tracking systems, payment platforms, prediction models, and data pipelines!"
-        ],
-        'resume': [
-            "📄 Download Anubhob's complete resume using the 'Download Resume' button! It contains detailed project descriptions, technical skills, certifications, and contact information in professional format!",
-            "His CV showcases all major projects, technical expertise, work experience at Legal Gini, educational background, and certifications. Perfect for understanding his complete professional profile!",
-            "The resume includes project metrics (like 85% ML accuracy, 40ms latency), technology stacks, and achievements. Use the download button in the header or contact section!"
-        ]
-    }
-    
-    # Determine response category
-    category = 'default'
-    
-    if any(word in user_message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
-        category = 'greeting'
-    elif any(word in user_message_lower for word in ['project', 'work', 'portfolio', 'trackbeez', 'ipl', 'midpay', 'scraping']):
-        category = 'projects'
-    elif any(word in user_message_lower for word in ['skill', 'technology', 'programming', 'language', 'python', 'ml', 'web', 'react', 'flask']):
-        category = 'skills'
-    elif any(word in user_message_lower for word in ['contact', 'email', 'reach', 'connect', 'linkedin', 'github', 'phone']):
-        category = 'contact'
-    elif any(word in user_message_lower for word in ['education', 'study', 'university', 'degree', 'uem', 'harvard', 'cs50']):
-        category = 'education'
-    elif any(word in user_message_lower for word in ['experience', 'background', 'career', 'work', 'job', 'legal', 'gini']):
-        category = 'experience'
-    elif any(word in user_message_lower for word in ['resume', 'cv', 'download']):
-        category = 'resume'
+        bot_response = gemini_response
     else:
-        # Default responses
-        default_responses = [
-            "I can help you learn about Anubhob's projects, technical skills, education, experience, or contact information. What interests you most?",
-            "Feel free to ask about: 🚀 Projects (TrackBeez, IPL Predictor, MidPay), 💻 Technical Skills, 🎓 Education, 💼 Work Experience, or 📞 How to Contact him!",
-            "I'd love to help! Try asking about his machine learning projects, web development work, data engineering experience, or the best way to get in touch!",
-            "You can ask about specific projects, his technical expertise (Python, ML, Web Dev), educational background (UEM + Harvard courses), or his current role as Data Engineer!"
-        ]
-        return jsonify({'response': default_responses[hash(user_message) % len(default_responses)]})
+        # Fallback to predefined responses if Gemini is unavailable
+        user_message_lower = user_message.lower()
+        
+        # Enhanced bot responses with more context about Anubhob
+        responses = {
+            'greeting': [
+                "Hello! I'm Anubhob's AI assistant. I can help you learn about his skills, projects, and experience. What would you like to know?",
+                "Hi there! Welcome to Anubhob's portfolio. Feel free to ask me about his technical background, projects, or how to get in touch!",
+                "Hey! I'm here to help you navigate through Anubhob's portfolio. Ask me anything about his work!"
+            ],
+            'projects': [
+                "Anubhob has several impressive projects: 🚀 TrackBeez (GPS tracking for school buses), 🤖 AI Web Scraping Pipeline, 💳 MidPay (blockchain escrow system), and 🏏 IPL Predictor (85% accuracy ML model). Each showcases different technical skills!",
+                "His notable projects include real-time GPS tracking systems, AI-powered data pipelines, blockchain payment solutions, and machine learning prediction models. Check out the Projects section for detailed technical information!",
+                "From ML algorithms to full-stack applications, Anubhob's projects demonstrate expertise in Python, TensorFlow, React, blockchain, and cloud technologies. Each project solves real-world problems!"
+            ],
+            'skills': [
+                "Anubhob's technical stack: 🐍 Python, 🤖 ML (TensorFlow, scikit-learn), 🌐 Web Dev (React, Flask, Node.js), 📊 Data Engineering, ☁️ Cloud (GCP, Azure, AWS), and 🔗 Blockchain. Plus Java, C, JavaScript, and multiple databases!",
+                "He excels in full-stack development, machine learning, data pipeline design, computer vision, automation, and system architecture. His skills span from low-level programming to AI integration!",
+                "Core expertise includes Python automation, ML model development, web applications, database design (MongoDB, MySQL), cloud deployment, and API development. Check the Skills section for the complete breakdown!"
+            ],
+            'contact': [
+                "📧 anubhob435@gmail.com | 📱 +91 8583005957 | 💼 LinkedIn: /in/anubhob-dey-05702714b/ | 🐙 GitHub: /Anubhob435 | 📍 Kolkata, India (UTC+5:30). You can also use the contact form below!",
+                "Anubhob is actively seeking new opportunities and collaborations! Best to reach him via email (responds quickly) or LinkedIn. He's open to discussing projects, freelance work, or just tech conversations!",
+                "Available for projects starting May 2025. Connect through email, LinkedIn, or GitHub. He specializes in web applications, data engineering, AI integration, and process automation!"
+            ],
+            'education': [
+                "🎓 University of Engineering & Management (UEM) graduate with computer science focus. Enhanced his education with Harvard CS50x, CS50p Python certification, Udemy Web Dev Bootcamp, and LinkedIn Java OOP certification!",
+                "Strong academic foundation from UEM combined with continuous learning through prestigious online courses. His education spans theoretical CS concepts to practical implementation skills!",
+                "UEM provided the foundation, but Anubhob's self-directed learning through Harvard, Udemy, and hands-on projects shaped his diverse technical expertise across multiple domains!"
+            ],
+            'experience': [
+                "Currently Data Engineer for AI Model Training at Legal Gini (Jan 2025-Present). Works on data pipelines, web scraping automation, AWS S3 integration, and parallel processing for AI model development!",
+                "Professional experience in ML model development, full-stack web applications, data analysis, and automation. His projects demonstrate real-world application across multiple technology stacks!",
+                "From university projects to professional data engineering role, Anubhob has built end-to-end solutions including GPS tracking systems, payment platforms, prediction models, and data pipelines!"
+            ],
+            'resume': [
+                "📄 Download Anubhob's complete resume using the 'Download Resume' button! It contains detailed project descriptions, technical skills, certifications, and contact information in professional format!",
+                "His CV showcases all major projects, technical expertise, work experience at Legal Gini, educational background, and certifications. Perfect for understanding his complete professional profile!",
+                "The resume includes project metrics (like 85% ML accuracy, 40ms latency), technology stacks, and achievements. Use the download button in the header or contact section!"
+            ]
+        }
+        
+        # Determine response category
+        category = 'default'
+        
+        if any(word in user_message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
+            category = 'greeting'
+        elif any(word in user_message_lower for word in ['project', 'work', 'portfolio', 'trackbeez', 'ipl', 'midpay', 'scraping']):
+            category = 'projects'
+        elif any(word in user_message_lower for word in ['skill', 'technology', 'programming', 'language', 'python', 'ml', 'web', 'react', 'flask']):
+            category = 'skills'
+        elif any(word in user_message_lower for word in ['contact', 'email', 'reach', 'connect', 'linkedin', 'github', 'phone']):
+            category = 'contact'
+        elif any(word in user_message_lower for word in ['education', 'study', 'university', 'degree', 'uem', 'harvard', 'cs50']):
+            category = 'education'
+        elif any(word in user_message_lower for word in ['experience', 'background', 'career', 'work', 'job', 'legal', 'gini']):
+            category = 'experience'
+        elif any(word in user_message_lower for word in ['resume', 'cv', 'download']):
+            category = 'resume'
+        else:
+            # Default responses
+            default_responses = [
+                "I can help you learn about Anubhob's projects, technical skills, education, experience, or contact information. What interests you most?",
+                "Feel free to ask about: 🚀 Projects (TrackBeez, IPL Predictor, MidPay), 💻 Technical Skills, 🎓 Education, 💼 Work Experience, or 📞 How to Contact him!",
+                "I'd love to help! Try asking about his machine learning projects, web development work, data engineering experience, or the best way to get in touch!",
+                "You can ask about specific projects, his technical expertise (Python, ML, Web Dev), educational background (UEM + Harvard courses), or his current role as Data Engineer!"
+            ]
+            bot_response = default_responses[hash(user_message) % len(default_responses)]
+        
+        if category != 'default':
+            # Return response from appropriate category
+            category_responses = responses[category]
+            bot_response = category_responses[hash(user_message) % len(category_responses)]
     
-    # Return response from appropriate category
-    category_responses = responses[category]
-    response = category_responses[hash(user_message) % len(category_responses)]
+    # Store conversation in MongoDB
+    try:
+        conversation_doc = {
+            'group_id': group_id,
+            'ip_address': user_ip,
+            'session_id': session_id,
+            'user_message': user_message,
+            'bot_response': bot_response,
+            'timestamp': datetime.utcnow(),
+            'source': 'gemini' if gemini_response else 'fallback'
+        }
+        conversations_collection.insert_one(conversation_doc)
+    except Exception as e:
+        print(f"Error storing conversation: {e}")
+        # Continue even if MongoDB storage fails
     
-    return jsonify({'response': response})
+    return jsonify({'response': bot_response, 'session_id': session_id})
 
 if __name__ == '__main__':
     app.run(debug=True)

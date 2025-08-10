@@ -471,19 +471,35 @@ function initChatWidget() {
             // Show typing indicator
             addTypingIndicator();
             
+            // Get or create session ID
+            let sessionId = localStorage.getItem('chat_session_id');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('chat_session_id', sessionId);
+            }
+            
             // Send request to Flask backend
             fetch('/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({ 
+                    message: message,
+                    session_id: sessionId,
+                    group_id: 'portfolio_chat'
+                })
             })
             .then(response => response.json())
             .then(data => {
                 removeTypingIndicator();
                 addMessage(data.response, 'bot');
                 sendMessageBtn.disabled = false;
+                
+                // Update session ID if provided by server
+                if (data.session_id) {
+                    localStorage.setItem('chat_session_id', data.session_id);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
