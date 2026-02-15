@@ -3,180 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anubhob's GitHub Portfolio</title>
+    <title>Anubhob Dey — Software Developer &amp; Data Engineer</title>
+    <meta name="description" content="Portfolio of Anubhob Dey — Software Developer, Data Engineer, and AI Enthusiast based in Kolkata, India.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons8-github-500.png') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/github-mark-white.ico') }}">
 </head>
-<body class="light-mode">    <!-- Social Media Sidebar -->
-    <div class="social-sidebar">
-        <a href="https://github.com/Anubhob435" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/anubhob-dey-05702714b/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-        <a href="mailto:anubhob435@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-        </div>
+<body>
+    <!-- ===== LOADER ===== -->
+    <div id="loader" class="loader">
+        <div class="loader-spinner"></div>
+    </div>
 
-        <!-- Header -->
-        <header>
-        <div class="logo">
-            <a href="https://github.com/Anubhob435/GithubPortfolio" target="_blank">
-            <img src="{{ url_for('static', filename='images/icons8-github-500.png') }}" alt="GitHub Logo">
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">{</span>AD<span class="logo-bracket">}</span>
             </a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#joinme">Contact</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certs</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
-        <div class="theme-toggle">
-            <button id="theme-toggle-btn" title="Toggle dark/light mode">
+            <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i>
                 <i class="fas fa-sun"></i>
             </button>
         </div>
-    </header>
+    </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="section">
-        <div class="container">
-            <div class="home-content">
-                <div class="home-text">
-                    <div class="badges-container">
-                        <span class="github-badge">Developer</span>
-                        <span class="github-badge"><i class="fas fa-graduation-cap"></i> Student</span>
-                        <span class="github-badge accent"><i class="fas fa-code-branch"></i> Open Source</span>
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <p class="hero-greeting fade-up">Hello, I'm</p>
+                <h1 class="hero-name fade-up">Anubhob Dey</h1>
+                <div class="hero-role fade-up">
+                    <span class="typewriter" id="typewriter"></span><span class="cursor">|</span>
+                </div>
+                <p class="hero-desc fade-up">
+                    Building efficient data pipelines, intelligent automations, and full-stack applications.
+                    Currently a <strong>Data Engineer</strong> at Legal Gini.
+                </p>
+                <div class="hero-stats fade-up">
+                    <div class="stat">
+                        <span class="stat-num" id="stat-repos">0</span>
+                        <span class="stat-label">Repos</span>
                     </div>
-                    <h1>Hi, I'm Anubhob Dey <span class="wave">👋</span></h1>
-                    <div class="typewriter">
-                        <span id="typing-text"></span><span class="cursor">|</span>
+                    <div class="stat">
+                        <span class="stat-num" id="stat-contribs">0</span>
+                        <span class="stat-label">Contributions</span>
                     </div>
-                    <div class="github-bio">
-                        <p><i class="fas fa-code"></i> B. Tech Student | Software Developer</p>
-                        <p><i class="fas fa-lightbulb"></i> Focused on Software Development and Machine Learning</p>
-                        <p><i class="fas fa-project-diagram"></i> Turning ideas into functional code</p>
-                        <p><i class="fas fa-chart-line"></i> Always learning, always growing</p>
+                    <div class="stat">
+                        <span class="stat-num" id="stat-stars">0</span>
+                        <span class="stat-label">Stars</span>
                     </div>
-                    <div class="github-stats">
-                        <div class="stat-item">
-                            <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
-                            <div class="stat-info">
-                                <span class="stat-count" id="repo-count">XX</span>
-                                <span class="stat-label">Repositories</span>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon"><i class="fas fa-code-commit"></i></div>
-                            <div class="stat-info">
-                                <span class="stat-count" id="contrib-count">XX</span>
-                                <span class="stat-label">Contributions</span>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon"><i class="fas fa-star"></i></div>
-                            <div class="stat-info">
-                                <span class="stat-count" id="star-count">XX</span>
-                                <span class="stat-label">Stars</span>
-                            </div>
-                        </div>
+                    <div class="stat">
+                        <span class="stat-num" id="stat-streak">0</span>
+                        <span class="stat-label">Longest Streak</span>
                     </div>
-                    <div class="cta-buttons">
-                        <a href="#projects" class="btn primary-btn"><i class="fas fa-code-branch"></i> View Projects</a>
-                        <a href="#joinme" class="btn secondary-btn"><i class="fas fa-user-plus"></i> Connect</a>
-                        <a href="{{ url_for('static', filename='images/anubhob_dey_cv3.pdf') }}" class="btn outline-btn" id="resume-btn" download><i class="fas fa-file-alt"></i> Resume</a>
-                    </div>
-                </div>                <div class="profile-container">
-                    <div class="profile-pic">
-                        <div class="profile-pic-inner">
-                            <img class="profile-front" src="{{ url_for('static', filename='images/profile-pic.jpg') }}" alt="Anubhob's Profile">
-                            <img class="profile-back" src="{{ url_for('static', filename='images/alter_profile.png') }}" alt="Anubhob's Alternate Profile">
-                        </div>
-                        <div class="profile-outline"></div>
-                    </div>
-                    <div class="status-badge pulse">Available for hire</div>
-                    <div class="social-proof">
-                        <div class="tech-bubbles">
-                            <span class="tech-bubble"><i class="fab fa-python"></i></span>
-                            <span class="tech-bubble"><i class="fab fa-js"></i></span>
-                            <span class="tech-bubble"><i class="fab fa-java"></i></span>
-                            <span class="tech-bubble"><i class="fab fa-react"></i></span>
-                        </div>
-                    </div>
+                </div>
+                <div class="hero-actions fade-up">
+                    <a href="#projects" class="btn btn-primary"><i class="fas fa-code-branch"></i> View Projects</a>
+                    <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Get in Touch</a>
+                    <a href="{{ url_for('static', filename='images/anubhob_dey_cv3.pdf') }}" class="btn btn-ghost" download><i class="fas fa-download"></i> Resume</a>
+                </div>
+                <div class="hero-social fade-up">
+                    <a href="https://github.com/Anubhob435" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/anubhob-dey-05702714b/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:anubhob435@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
+            <div class="hero-visual fade-up">
+                <div class="hero-image-wrap">
+                    <img src="{{ url_for('static', filename='images/profile-pic.png') }}" alt="Anubhob Dey" class="hero-img">
+                    <div class="hero-image-ring"></div>
                 </div>
-                <div class="arrow">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="hero-badge">
+                    <span class="badge-dot"></span> Available for hire
                 </div>
             </div>
         </div>
+        <div class="scroll-hint" id="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ===== ABOUT ===== -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="{{ url_for('static', filename='images/about-img.jpg') }}" alt="Anubhob Working">
-                    <div class="commit-activity">
-                        <div class="commit-graph">
-                            <!-- Simulated GitHub contribution graph -->
-                            <div class="graph-row">
-                                <span class="graph-cell level-0"></span>
-                                <span class="graph-cell level-1"></span>
-                                <span class="graph-cell level-2"></span>
-                                <span class="graph-cell level-3"></span>
-                                <span class="graph-cell level-1"></span>
-                                <span class="graph-cell level-0"></span>
-                                <span class="graph-cell level-2"></span>
-                            </div>
-                            <div class="graph-row">
-                                <span class="graph-cell level-2"></span>
-                                <span class="graph-cell level-3"></span>
-                                <span class="graph-cell level-4"></span>
-                                <span class="graph-cell level-2"></span>
-                                <span class="graph-cell level-1"></span>
-                                <span class="graph-cell level-3"></span>
-                                <span class="graph-cell level-0"></span>
-                            </div>
+            <h2 class="section-title fade-up">About Me</h2>
+            <div class="about-grid">
+                <div class="about-image fade-up">
+                    <img src="{{ url_for('static', filename='images/about-img.jpg') }}" alt="Anubhob working">
+                </div>
+                <div class="about-content fade-up">
+                    <div class="about-card">
+                        <div class="about-card-header">
+                            <i class="far fa-file-alt"></i> README.md
                         </div>
-                        <p class="commit-text">Consistent contributor</p>
+                        <div class="about-card-body">
+                            <p>I'm a passionate software developer with a strong foundation in computer science and a desire to create impactful applications. My journey in technology began several years ago, and I've been constantly learning and improving.</p>
+                            <p>I specialize in <strong>data engineering</strong>, <strong>machine learning</strong>, and <strong>full-stack web development</strong>. I enjoy solving complex problems and building systems that are efficient, scalable, and elegant.</p>
+                            <p>When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, playing chess, or hiking through nature trails.</p>
+                        </div>
+                    </div>
+                    <div class="about-quick-facts">
+                        <div class="fact"><i class="fas fa-map-marker-alt"></i> Kolkata, India</div>
+                        <div class="fact"><i class="fas fa-graduation-cap"></i> B.Tech CSE (AI & ML)</div>
+                        <div class="fact"><i class="fas fa-briefcase"></i> Data Engineer @ Legal Gini</div>
+                        <div class="fact"><i class="fas fa-language"></i> English, Hindi, Bengali</div>
                     </div>
                 </div>
-                <div class="about-text">
-                    <div class="readme-container">
-                        <div class="readme-header">
-                            <h3><i class="far fa-file-alt"></i> README.md</h3>
-                        </div>
-                        <div class="readme-content">
-                            <p>I am a passionate software developer with a strong foundation in computer science and a desire to create impactful applications.</p>
-                            <p>My journey in technology began several years ago, and since then, I've been constantly learning and improving my skills to stay at the forefront of innovation.</p>
-                            <p>I enjoy solving complex problems and collaborating with teams to build efficient and elegant solutions. When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.</p>
-                            <p>I believe in clean code, user-centered design, and continuous improvement in everything I do.</p>
-                            <div class="tech-stack">
-                                <p><strong>🔧 Tech Stack:</strong></p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">JavaScript</span>
-                                    <span class="tech-tag">Java</span>
-                                    <span class="tech-tag">React</span>
-                                    <span class="tech-tag">Flask</span>
-                                    <span class="tech-tag">Docker</span>
-                                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title fade-up">Experience</h2>
+            <div class="exp-timeline">
+                <div class="exp-item fade-up">
+                    <div class="exp-dot"></div>
+                    <div class="exp-card">
+                        <div class="exp-header">
+                            <div>
+                                <h3 class="exp-role">Data Engineer for AI Model Training</h3>
+                                <p class="exp-company"><i class="fas fa-building"></i> Legal Gini <span class="exp-type">Remote</span></p>
                             </div>
+                            <span class="exp-date">Jan 2025 – Present</span>
+                        </div>
+                        <p class="exp-desc">Building data engineering solutions for AI model training — efficient data collection, processing, and cloud storage.</p>
+                        <ul class="exp-achievements">
+                            <li><strong>50% increased efficiency</strong> — Designed a web crawler with Python &amp; Selenium for data mining</li>
+                            <li><strong>500% workflow speed boost</strong> — Engineered automated data pipeline with parallel processing</li>
+                            <li><strong>24/7 monitoring</strong> — Deployed AI agent for real-time workflow log monitoring</li>
+                            <li><strong>Optimized training</strong> — Enhanced vectorization &amp; data upload to AWS S3 Buckets</li>
+                        </ul>
+                        <div class="exp-tags">
+                            <span>Python</span><span>Selenium</span><span>AWS S3</span><span>Parallel Processing</span><span>AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-item fade-up">
+                    <div class="exp-dot"></div>
+                    <div class="exp-card">
+                        <div class="exp-header">
+                            <div>
+                                <h3 class="exp-role">Web Scraping &amp; Data Engineer</h3>
+                                <p class="exp-company"><i class="fas fa-building"></i> Foresightedge Pvt Ltd <span class="exp-type">Remote</span></p>
+                            </div>
+                            <span class="exp-date">Aug 2025 – Jan 2026</span>
+                        </div>
+                        <p class="exp-desc">Worked on end-to-end web and app data extraction — analyzing websites, identifying internal APIs, and building efficient scraping pipelines with structured workflows and automation.</p>
+                        <ul class="exp-achievements">
+                            <li><strong>Scraping &amp; Extraction</strong> — Built efficient scraping solutions using BeautifulSoup, Selenium, and parallel workers for large-scale datasets</li>
+                            <li><strong>Data Pipeline Design</strong> — Planned and implemented pipelines from extraction to storage with logs, checkpoints, and structured workflows</li>
+                            <li><strong>Automation &amp; Deployment</strong> — Hands-on with n8n, REST APIs, webhooks, Docker, Nginx, and VPS deployment on cloud platforms (GCP/Azure/AWS)</li>
+                            <li><strong>DevOps &amp; Version Control</strong> — Managed repositories with proper Git practices, documentation, CI/CD, and clean code standards</li>
+                            <li><strong>Performance &amp; Cost Optimization</strong> — Reduced costs using open-source tools, optimized system stability, and handled SQL/NoSQL database decisions with regular backups</li>
+                        </ul>
+                        <div class="exp-tags">
+                            <span>Python</span><span>BeautifulSoup</span><span>Selenium</span><span>Docker</span><span>n8n</span><span>GCP</span><span>SQL/NoSQL</span><span>Git</span><span>Nginx</span>
                         </div>
                     </div>
                 </div>
@@ -184,148 +192,15 @@
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section">
-    <div class="container">
-        <h2 class="section-title">Education</h2>
-        <div class="education-container">
-            <div class="education-timeline">
-                <div class="education-item">
-                    <div class="education-year">
-                        <span class="year-text">2022-Present</span>
-                        <div class="education-dot"></div>
-                    </div>
-                    <div class="education-content">
-                        <div class="education-card">
-                            <div class="education-header">
-                                <h3>B. Tech in Computer Science & Engineering (AI & ML)</h3>
-                                <div class="education-status current">Current</div>
-                            </div>                            <div class="education-school">
-                                <div class="university-logo">
-                                    <img src="{{ url_for('static', filename='images/uem_logo.png') }}" alt="UEM Logo">
-                                </div>
-                                University of Engineering and Management, Kolkata, WB
-                            </div>
-                            <div class="education-details">
-                                <div class="education-detail"><i class="fas fa-graduation-cap"></i> CGPA: <span class="highlight">8.43/10</span></div>
-                                <div class="education-detail"><i class="fas fa-calendar-alt"></i> Expected Graduation: 2026</div>
-                            </div>
-                            <div class="education-courses">
-                                <h4>Key Courses:</h4>
-                                <div class="courses-grid">
-                                    <span class="course-tag">Data Structures</span>
-                                    <span class="course-tag">Machine Learning</span>
-                                    <span class="course-tag">AI Algorithms</span>
-                                    <span class="course-tag">Computer Vision</span>
-                                    <span class="course-tag">Deep Learning</span>
-                                    <span class="course-tag">Database Systems</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="education-item">
-                    <div class="education-year">
-                        <span class="year-text">2020-2022</span>
-                        <div class="education-dot"></div>
-                    </div>
-                    <div class="education-content">
-                        <div class="education-card">                            <div class="education-header">
-                                <h3>Senior Secondary</h3>
-                                <div class="education-status completed">Completed</div>
-                            </div>
-                            <div class="education-school">
-                                <div class="university-logo">
-                                    <img src="{{ url_for('static', filename='images/bdmi_logo.jpg') }}" alt="BDMI Logo">
-                                </div>
-                                B. D. M. International, Kolkata, WB
-                            </div>
-                            <div class="education-details">
-                                <div class="education-detail"><i class="fas fa-award"></i> Percentage: <span class="highlight">76%</span></div>
-                                <div class="education-detail"><i class="fas fa-book-reader"></i> Science Stream with Computer Science</div>
-                            </div>
-                            <div class="education-courses">
-                                <h4>Key Subjects:</h4>
-                                <div class="courses-grid">
-                                    <span class="course-tag">Physics</span>
-                                    <span class="course-tag">Chemistry</span>
-                                    <span class="course-tag">Mathematics</span>
-                                    <span class="course-tag">Computer Science</span>
-                                    <span class="course-tag">English</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="education-item">
-                    <div class="education-year">
-                        <span class="year-text">2018-2020</span>
-                        <div class="education-dot"></div>
-                    </div>
-                    <div class="education-content">
-                        <div class="education-card">                            <div class="education-header">
-                                <h3>Secondary</h3>
-                                <div class="education-status completed">Completed</div>
-                            </div>
-                            <div class="education-school">
-                                <div class="university-logo">
-                                    <img src="{{ url_for('static', filename='images/bdmi_logo.jpg') }}" alt="BDMI Logo">
-                                </div>
-                                B. D. M. International, Kolkata, WB
-                            </div>
-                            <div class="education-details">
-                                <div class="education-detail"><i class="fas fa-award"></i> Percentage: <span class="highlight">95%</span></div>
-                            </div>
-                            <div class="education-achievements">
-                                <h4>Achievements:</h4>
-                                <ul class="achievements-list">
-                                    <li><i class="fas fa-medal"></i> School Science Fair Winner</li>
-                                    <li><i class="fas fa-trophy"></i> Math Olympiad Participant</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="education-sidebar">
-                <div class="education-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div class="stat-info">
-                            <h4>Education Journey</h4>
-                            <p>6+ years of formal education in Computer Science and related fields</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-certificate"></i></div>
-                        <div class="stat-info">
-                            <h4>Certifications</h4>
-                            <p>5+ professional certifications complementing academic knowledge</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-laptop-code"></i></div>
-                        <div class="stat-info">
-                            <h4>Skills Developed</h4>
-                            <p>Technical and soft skills through academic projects and coursework</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>    <!-- Skills Section -->
+    <!-- ===== SKILLS ===== -->
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-overview">
+            <h2 class="section-title fade-up">Skills & Expertise</h2>
+            <div class="skills-overview fade-up">
                 <p class="skills-intro"><i class="fas fa-book-reader"></i> Continuously expanding my skill set through self-learning, formal education, and hands-on projects. My technical abilities span multiple domains with a focus on software development and data engineering.</p>
             </div>
-            
-            <div class="skills-tabs">
+
+            <div class="skills-tabs fade-up">
                 <div class="skills-navigation">
                     <button class="skill-tab-btn active" data-target="core-technologies">
                         <i class="fas fa-layer-group"></i> Core Technologies
@@ -334,23 +209,22 @@
                         <i class="fas fa-globe"></i> Web Development
                     </button>
                     <button class="skill-tab-btn" data-target="data-ml">
-                        <i class="fas fa-brain"></i> Data Engineering & ML
+                        <i class="fas fa-brain"></i> Data & ML
                     </button>
                     <button class="skill-tab-btn" data-target="database-systems">
-                        <i class="fas fa-database"></i> Database Systems
+                        <i class="fas fa-database"></i> Databases
                     </button>
                     <button class="skill-tab-btn" data-target="devops-cloud">
-                        <i class="fas fa-cloud"></i> DevOps & Cloud
+                        <i class="fas fa-cloud"></i> Cloud & DevOps
                     </button>
                     <button class="skill-tab-btn" data-target="other-skills">
-                        <i class="fas fa-tools"></i> Other Technical Skills
+                        <i class="fas fa-tools"></i> Other Skills
                     </button>
                 </div>
-                
+
                 <div class="skills-tab-content">
-                    <!-- Core Technologies Tab -->
                     <div class="skill-tab-pane active" id="core-technologies">
-                        <div class="skill-grid">
+                        <div class="skill-badge-grid">
                             <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
                             <span class="tech-badge"><i class="fab fa-java"></i> Java</span>
                             <span class="tech-badge"><i class="fas fa-code"></i> C</span>
@@ -359,10 +233,8 @@
                             <span class="tech-badge"><i class="fab fa-linux"></i> Unix/Linux</span>
                         </div>
                     </div>
-                    
-                    <!-- Web Development Tab -->
                     <div class="skill-tab-pane" id="web-development">
-                        <div class="skill-grid">
+                        <div class="skill-badge-grid">
                             <span class="tech-badge"><i class="fab fa-html5"></i> HTML/CSS</span>
                             <span class="tech-badge"><i class="fab fa-react"></i> React</span>
                             <span class="tech-badge"><i class="fas fa-flask"></i> Flask</span>
@@ -370,21 +242,18 @@
                             <span class="tech-badge"><i class="fas fa-exchange-alt"></i> RESTful APIs</span>
                         </div>
                     </div>
-                    
-                    <!-- Data Engineering & ML Tab -->
                     <div class="skill-tab-pane" id="data-ml">
-                        <div class="skill-grid">
+                        <div class="skill-badge-grid">
                             <span class="tech-badge"><i class="fas fa-network-wired"></i> TensorFlow</span>
+                            <span class="tech-badge"><i class="fas fa-chart-line"></i> scikit-learn</span>
                             <span class="tech-badge"><i class="fas fa-spider"></i> Web Scraping</span>
-                            <span class="tech-badge"><i class="fas fa-project-diagram"></i> Data Pipeline Design</span>
+                            <span class="tech-badge"><i class="fas fa-project-diagram"></i> Data Pipelines</span>
                             <span class="tech-badge"><i class="fas fa-eye"></i> Computer Vision</span>
                             <span class="tech-badge"><i class="fas fa-camera"></i> OpenCV</span>
                         </div>
                     </div>
-                    
-                    <!-- Database Systems Tab -->
                     <div class="skill-tab-pane" id="database-systems">
-                        <div class="skill-grid">
+                        <div class="skill-badge-grid">
                             <span class="tech-badge"><i class="fas fa-leaf"></i> MongoDB</span>
                             <span class="tech-badge"><i class="fas fa-database"></i> MySQL</span>
                             <span class="tech-badge"><i class="fas fa-server"></i> Oracle</span>
@@ -392,21 +261,17 @@
                             <span class="tech-badge"><i class="fas fa-tachometer-alt"></i> SQL Optimization</span>
                         </div>
                     </div>
-                    
-                    <!-- DevOps & Cloud Tab -->
                     <div class="skill-tab-pane" id="devops-cloud">
-                        <div class="skill-grid">
+                        <div class="skill-badge-grid">
                             <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
                             <span class="tech-badge"><i class="fab fa-google"></i> Google Cloud</span>
-                            <span class="tech-badge"><i class="fab fa-microsoft"></i> Microsoft Azure</span>
+                            <span class="tech-badge"><i class="fab fa-microsoft"></i> Azure</span>
                             <span class="tech-badge"><i class="fab fa-aws"></i> AWS S3</span>
                             <span class="tech-badge"><i class="fas fa-sync-alt"></i> CI/CD</span>
                         </div>
                     </div>
-                    
-                    <!-- Other Technical Skills Tab -->
                     <div class="skill-tab-pane" id="other-skills">
-                        <div class="skill-grid">
+                        <div class="skill-badge-grid">
                             <span class="tech-badge"><i class="fas fa-robot"></i> Automation</span>
                             <span class="tech-badge"><i class="fas fa-code-branch"></i> Git</span>
                             <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
@@ -423,592 +288,318 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Skills Summary -->
-            <div class="skills-summary">
+
+            <div class="skills-summary fade-up">
                 <h3><i class="fas fa-star"></i> Areas of Expertise</h3>
-                <div class="expertise-grid">
-                    <div class="expertise-item">
-                        <div class="expertise-icon"><i class="fas fa-robot"></i></div>
-                        <h4>Automation</h4>
-                        <p>Specializing in process automation with Python, creating efficient workflows that save time and reduce errors.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="expertise-icon"><i class="fas fa-database"></i></div>
-                        <h4>Data Engineering</h4>
-                        <p>Designing robust data pipelines and efficient database solutions for complex data processing needs.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="expertise-icon"><i class="fas fa-brain"></i></div>
-                        <h4>AI Integration</h4>
-                        <p>Implementing practical AI solutions in real-world applications with a focus on usability and performance.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="expertise-icon"><i class="fas fa-pencil-ruler"></i></div>
-                        <h4>Efficient Design</h4>
-                        <p>Creating elegant, scalable architectures with emphasis on performance optimization and resource efficiency.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <div class="experience-year">
-                        <span class="date-badge">January 2025 – Present</span>
-                        <div class="experience-duration">4 months</div>
-                    </div>
-                    <div class="experience-content">                        <div class="experience-header">
-                            <h3 class="experience-title">Data Engineer for AI Model Training</h3>
-                            <span class="company-badge">
-                                    <img src="{{ url_for('static', filename='images/footergini.png') }}" alt="Legal Gini Logo">
-                            </span>
-                        </div>
-                        <p class="experience-location"><i class="fas fa-map-marker-alt"></i> Remote</p>
-                        <div class="experience-description">
-                            <p>Working on data engineering solutions for AI model training, focusing on efficient data collection, processing, and storage.</p>
-                        </div>
-                        <div class="key-achievements">
-                            <h4><i class="fas fa-trophy"></i> Key Achievements</h4>
-                            <ul class="experience-accomplishments">
-                                <li>
-                                    <span class="achievement-highlight">50% increased efficiency</span>
-                                    <p>Designed a web crawler using Python and Selenium for improved data mining operations</p>
-                                </li>
-                                <li>
-                                    <span class="achievement-highlight">500% workflow speed boost</span>
-                                    <p>Engineered an automated data pipeline with parallel processing capabilities</p>
-                                </li>
-                                <li>
-                                    <span class="achievement-highlight">24/7 monitoring</span>
-                                    <p>Deployed an AI agent for real-time workflow log monitoring providing instant feedback</p>
-                                </li>
-                                <li>
-                                    <span class="achievement-highlight">Optimized training process</span>
-                                    <p>Enhanced vectorization and data upload to AWS S3 Buckets for faster model training</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tech-used">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">AWS S3</span>
-                            <span class="tech-tag">Parallel Processing</span>
-                            <span class="tech-tag">AI</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            
-            <!-- Featured Projects -->
-            <div class="featured-projects">                <div class="project-card featured">
-                    <div class="project-image">
-                        <div class="project-badge">Featured Project</div>
-                        <img src="{{ url_for('static', filename='images/trackbeez.png') }}" alt="GPS Tracking System" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">
-                                Enhanced School Bus Safety with GPS Tracking
-                            </h3>                            <div class="project-links">
-                                <a href="https://github.com/Anubhob435/TrackBeesBetav2.0" target="_blank" class="project-github-link">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <span class="project-status">In Progress</span>
-                            </div>
-                        </div>
-                        <p class="project-description">A comprehensive real-time GPS tracking solution designed to enhance student safety during transportation with robust monitoring capabilities.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">40ms</span>
-                                <span class="metric-label">Latency</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">50+</span>
-                                <span class="metric-label">Users</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">256-bit</span>
-                                <span class="metric-label">Encryption</span>
-                            </div>
-                        </div>
-                        <div class="project-details">
-                            <h4><i class="fas fa-tasks"></i> Key Features</h4>
-                            <ul class="project-features">
-                                <li><i class="fas fa-check-circle"></i> Real-time GPS tracking system with minimal latency for accurate location data</li>
-                                <li><i class="fas fa-check-circle"></i> Scalable Google Cloud infrastructure supporting multiple simultaneous users</li>
-                                <li><i class="fas fa-check-circle"></i> End-to-end encryption ensuring maximum data security for student information</li>
-                                <li><i class="fas fa-check-circle"></i> AI-driven monitoring for real-time alerts and notifications</li>
-                            </ul>
-                        </div>
-                        <div class="tech-stack">
-                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Google Cloud</span>
-                                <span class="tech-tag">GPS API</span>
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">TensorFlow</span>
-                            </div>
-                        </div>
-                        <div class="project-meta">
-                            <div class="project-timeline">
-                                <i class="far fa-calendar-alt"></i> August 2024 - Ongoing
-                            </div>
-                            <div class="project-team">
-                                <i class="fas fa-users"></i> Group Project
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                  <div class="project-card featured">
-                    <div class="project-image">
-                        <img src="{{ url_for('static', filename='images/ai_pipeline.png') }}" alt="Web Scraping Pipeline" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">                            <h3 class="project-title">
-                                Automated Web Scraping Pipeline
-                            </h3>
-                            <div class="project-links">
-                                <a href="https://github.com/Anubhob435/Webscrapper-Ai-Analyzer" target="_blank" class="project-github-link">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <span class="project-status completed">Completed</span>
-                            </div>
-                        </div>
-                        <p class="project-description">An advanced data pipeline for automated web scraping with intelligent processing capabilities and multiple data format support.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">99.9%</span>
-                                <span class="metric-label">Uptime</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">10%</span>
-                                <span class="metric-label">Faster Reads</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">7s</span>
-                                <span class="metric-label">reCAPTCHA Bypass</span>
-                            </div>
-                        </div>
-                        <div class="project-details">
-                            <h4><i class="fas fa-tasks"></i> Key Achievements</h4>
-                            <ul class="project-features">
-                                <li><i class="fas fa-check-circle"></i> Robust data pipeline with Selenium, Scrapy, and Beautiful Soup with near-perfect uptime</li>
-                                <li><i class="fas fa-check-circle"></i> Optimized data preprocessing algorithms for faster data access and processing</li>
-                                <li><i class="fas fa-check-circle"></i> AI-powered reCAPTCHA bypass system for uninterrupted data collection</li>
-                                <li><i class="fas fa-check-circle"></i> Multi-format data extraction supporting text, graphs, tables, and AI-summarized reports</li>
-                            </ul>
-                        </div>
-                        <div class="tech-stack">
-                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Selenium</span>
-                                <span class="tech-tag">Scrapy</span>
-                                <span class="tech-tag">Beautiful Soup</span>
-                                <span class="tech-tag">TensorFlow</span>
-                            </div>
-                        </div>
-                        <div class="project-meta">
-                            <div class="project-timeline">
-                                <i class="far fa-calendar-alt"></i> August 2024 - September 2024
-                            </div>
-                        </div>
-                    </div>
-                </div>                  <div class="project-card featured">
-                    <div class="project-image">
-                        <img src="{{ url_for('static', filename='images/Midpay.png') }}" alt="MidPay Escrow System" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">                            <h3 class="project-title">
-                                MidPay
-                            </h3>
-                            <div class="project-links">
-                                <a href="https://github.com/Anubhob435/midpay" target="_blank" class="project-github-link">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <span class="project-status completed">Completed</span>
-                            </div>
-                        </div>
-                        <p class="project-description">A simulation of an escrow payment system that facilitates secure transactions between two parties (A and B). It ensures that payments are held in escrow until services are completed and confirmed, enhanced with blockchain technology and a REST API.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">RSA-2048</span>
-                                <span class="metric-label">Encryption</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">REST</span>
-                                <span class="metric-label">API</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">PoW</span>
-                                <span class="metric-label">Blockchain</span>
-                            </div>
-                        </div>
-                        <div class="project-details">
-                            <h4><i class="fas fa-tasks"></i> Key Features</h4>
-                            <ul class="project-features">
-                                <li><i class="fas fa-check-circle"></i> Blockchain integration with proof-of-work for immutable transaction records</li>
-                                <li><i class="fas fa-check-circle"></i> RSA-based digital signatures for cryptographic verification of transactions</li>
-                                <li><i class="fas fa-check-circle"></i> Secure escrow payment system with transaction management capabilities</li>
-                                <li><i class="fas fa-check-circle"></i> REST API for integrating with web and mobile applications</li>
-                            </ul>
-                        </div>
-                        <div class="tech-stack">
-                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Blockchain</span>
-                                <span class="tech-tag">Cryptography</span>
-                                <span class="tech-tag">Flask</span>
-                                <span class="tech-tag">REST API</span>
-                            </div>
-                        </div>
-                        <div class="project-meta">
-                            <div class="project-timeline">
-                                <i class="far fa-calendar-alt"></i> January 2024 - May 2024
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                  <div class="project-card featured">
-                    <div class="project-image">
-                        <img src="{{ url_for('static', filename='images/IPLpredictor.png') }}" alt="IPL Match Outcome Predictor" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">                            <h3 class="project-title">
-                                IPL Match Outcome Predictor
-                            </h3>
-                            <div class="project-links">
-                                <a href="https://github.com/Anubhob435/ipl_predictor" target="_blank" class="project-github-link">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <span class="project-status completed">Completed</span>
-                            </div>
-                        </div>
-                        <p class="project-description">An advanced AI-based system for predicting IPL match outcomes, final scores, key player performance, and explaining predictions using a hybrid of machine learning and Gemini 2.0 AI.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">85%</span>
-                                <span class="metric-label">Prediction Accuracy</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">2</span>
-                                <span class="metric-label">ML Models</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">LLM</span>
-                                <span class="metric-label">Explanation</span>
-                            </div>
-                        </div>
-                        <div class="project-details">
-                            <h4><i class="fas fa-tasks"></i> Key Features</h4>
-                            <ul class="project-features">
-                                <li><i class="fas fa-check-circle"></i> ML predictions with probability scores for match winners and team performance metrics</li>
-                                <li><i class="fas fa-check-circle"></i> Gemini 2.0 AI-powered analysis of predictions in natural language with detailed explanations</li>
-                                <li><i class="fas fa-check-circle"></i> Comprehensive data processing pipeline for team stats, player performance, and venue analysis</li>
-                                <li><i class="fas fa-check-circle"></i> Multiple model implementations (Random Forest, XGBoost) with feature importance visualization</li>
-                            </ul>
-                        </div>
-                        <div class="tech-stack">
-                            <h4><i class="fas fa-code"></i> Technologies Used</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Scikit-learn</span>
-                                <span class="tech-tag">XGBoost</span>
-                                <span class="tech-tag">Pandas</span>
-                                <span class="tech-tag">Gemini AI</span>
-                            </div>
-                        </div>
-                        <div class="project-meta">
-                            <div class="project-timeline">
-                                <i class="far fa-calendar-alt"></i> October 2024 - December 2024
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <h3 class="github-projects-title">Other GitHub Projects</h3>
-            <div class="projects-grid" id="projects-container">
-                <!-- Projects will be loaded dynamically from GitHub API -->
-                <div class="loading">Loading projects...</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="section">
-        <div class="container">
-            <h2 class="section-title">Certifications</h2>
-            <div class="certifications-grid">
-                <div class="certification-card">
-                    <div class="certification-header">
-                        <div class="certification-logo harvard">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <div class="certification-issuer">
-                            <h4>Harvard University</h4>
-                            <span class="cert-date">June 2024</span>
-                        </div>
-                    </div>
-                    <div class="certification-content">
-                        <h3>CS50x: Introduction to Computer Science</h3>
-                        <p class="cert-description">A comprehensive introduction to computer science covering algorithms, data structures, resource management, software engineering, and web development.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">C</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Web Dev</span>
-                        </div>
-                        <div class="cert-actions">
-                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="certification-card">
-                    <div class="certification-header">
-                        <div class="certification-logo harvard">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <div class="certification-issuer">
-                            <h4>Harvard University</h4>
-                            <span class="cert-date">October 2024</span>
-                        </div>
-                    </div>
-                    <div class="certification-content">
-                        <h3>CS50p: Introduction to Python Programming</h3>
-                        <p class="cert-description">An in-depth course covering Python programming concepts, data structures, and problem-solving using Python's powerful libraries and frameworks.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">OOP</span>
-                            <span class="skill-tag">API</span>
-                            <span class="skill-tag">Libraries</span>
-                        </div>
-                        <div class="cert-actions">
-                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="certification-card">
-                    <div class="certification-header">
-                        <div class="certification-logo udemy">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div class="certification-issuer">
-                            <h4>Udemy</h4>
-                            <span class="cert-date">November 2024</span>
-                        </div>
-                    </div>
-                    <div class="certification-content">
-                        <h3>The Complete 2024 Web Development Bootcamp</h3>
-                        <p class="cert-description">A comprehensive course covering modern web development technologies, frameworks, and best practices for building responsive and dynamic web applications.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">HTML/CSS</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Node.js</span>
-                        </div>
-                        <div class="cert-actions">
-                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="certification-card">
-                    <div class="certification-header">
-                        <div class="certification-logo linkedin">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div class="certification-issuer">
-                            <h4>LinkedIn Learning</h4>
-                            <span class="cert-date">April 2024</span>
-                        </div>
-                    </div>
-                    <div class="certification-content">
-                        <h3>Java Object Oriented Programming</h3>
-                        <p class="cert-description">A specialized course focusing on object-oriented programming principles and patterns in Java, covering inheritance, polymorphism, encapsulation, and abstraction.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">OOP</span>
-                            <span class="skill-tag">Design Patterns</span>
-                            <span class="skill-tag">Best Practices</span>
-                        </div>
-                        <div class="cert-actions">
-                            <a href="#" class="btn-view-credential"><i class="fas fa-external-link-alt"></i> View Credential</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Leadership & Awards Section -->
-    <section id="leadership" class="section">
-        <div class="container">
-            <h2 class="section-title">Leadership, Interests & Awards</h2>
-            
-            <div class="achievements-tabs">
-                <div class="tab-navigation">
-                    <button class="tab-btn active" data-target="leadership-tab">
-                        <i class="fas fa-users"></i> Leadership
+                <div class="expertise-carousel" id="expertise-carousel">
+                    <button class="expertise-arrow expertise-arrow-left" id="expertise-prev" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button class="tab-btn" data-target="awards-tab">
-                        <i class="fas fa-trophy"></i> Awards
-                    </button>
-                    <button class="tab-btn" data-target="interests-tab">
-                        <i class="fas fa-heart"></i> Interests
+                    <div class="expertise-viewport" id="expertise-viewport">
+                        <div class="expertise-track" id="expertise-track">
+                            <div class="expertise-card">
+                                <div class="expertise-icon"><i class="fas fa-robot"></i></div>
+                                <h4>Automation</h4>
+                                <p>Process automation with Python — efficient workflows that save time and reduce errors.</p>
+                            </div>
+                            <div class="expertise-card">
+                                <div class="expertise-icon"><i class="fas fa-database"></i></div>
+                                <h4>Data Engineering</h4>
+                                <p>Robust data pipelines and efficient database solutions for complex processing needs.</p>
+                            </div>
+                            <div class="expertise-card">
+                                <div class="expertise-icon"><i class="fas fa-brain"></i></div>
+                                <h4>AI Integration</h4>
+                                <p>Practical AI solutions in real-world applications with focus on usability and performance.</p>
+                            </div>
+                            <div class="expertise-card">
+                                <div class="expertise-icon"><i class="fas fa-drafting-compass"></i></div>
+                                <h4>System Design</h4>
+                                <p>Elegant, scalable architectures with emphasis on performance and resource efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="expertise-arrow expertise-arrow-right" id="expertise-next" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-                
-                <div class="tab-content">
-                    <!-- Leadership Tab -->
-                    <div class="tab-pane active" id="leadership-tab">
-                        <div class="leadership-showcase">
-                            <div class="achievement-card featured-achievement">
-                                <div class="achievement-header">
-                                    <div class="achievement-icon mentor">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <div class="achievement-title">
-                                        <h3>Volunteer Teaching Assistant</h3>
-                                        <span class="achievement-org">Shiksha Sabke Liye NGO</span>
-                                    </div>
-                                </div>
-                                <div class="achievement-body">
-                                    <p class="achievement-description">Mentored 50+ students in programming and computer science concepts, focusing on making technology education accessible to underserved communities.</p>
-                                    <div class="achievement-highlights">
-                                        <div class="highlight-item">
-                                            <span class="highlight-value">50+</span>
-                                            <span class="highlight-label">Students</span>
-                                        </div>
-                                        <div class="highlight-item">
-                                            <span class="highlight-value">8</span>
-                                            <span class="highlight-label">Months</span>
-                                        </div>
-                                    </div>
-                                    <div class="achievement-tags">
-                                        <span class="activity-tag">Teaching</span>
-                                        <span class="activity-tag">Mentorship</span>
-                                        <span class="activity-tag">Community Service</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="achievement-card">
-                                <div class="achievement-header">
-                                    <div class="achievement-icon environment">
-                                        <i class="fas fa-leaf"></i>
-                                    </div>
-                                    <div class="achievement-title">
-                                        <h3>Climate Action Fundraising Lead</h3>
-                                        <span class="achievement-org">Green (R)evolution Organization</span>
-                                    </div>
-                                </div>
-                                <div class="achievement-body">
-                                    <p class="achievement-description">Led fundraising initiatives focused on climate change awareness and action, coordinating a team of volunteers to organize events and outreach programs.</p>
-                                    <div class="achievement-tags">
-                                        <span class="activity-tag">Leadership</span>
-                                        <span class="activity-tag">Fundraising</span>
-                                        <span class="activity-tag">Environment</span>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="expertise-dots" id="expertise-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title fade-up">Projects</h2>
+
+            <!-- Featured Projects - Vertical Carousel -->
+            <div class="carousel-wrapper fade-up">
+                <div class="carousel-viewport" id="carousel-viewport">
+                    <div class="carousel-track" id="carousel-track">
+                <!-- TrackBeez -->
+                <div class="project-featured carousel-slide">
+                    <div class="project-featured-img">
+                        <img src="{{ url_for('static', filename='images/trackbeez.png') }}" alt="TrackBeez">
+                        <span class="project-badge-label">Featured</span>
+                    </div>
+                    <div class="project-featured-body">
+                        <div class="project-featured-top">
+                            <h3>Enhanced School Bus Safety with GPS Tracking</h3>
+                            <a href="https://github.com/Anubhob435/TrackBeesBetav2.0" target="_blank" class="project-link-icon"><i class="fab fa-github"></i></a>
+                        </div>
+                        <p>Real-time GPS tracking solution to enhance student safety during school transportation with robust monitoring and AI-driven alerts.</p>
+                        <div class="project-metrics">
+                            <div class="metric"><span class="metric-val">40ms</span><span class="metric-lbl">Latency</span></div>
+                            <div class="metric"><span class="metric-val">50+</span><span class="metric-lbl">Users</span></div>
+                            <div class="metric"><span class="metric-val">256-bit</span><span class="metric-lbl">Encryption</span></div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Google Cloud</span><span>GPS API</span><span>React</span><span>Node.js</span><span>TensorFlow</span>
+                        </div>
+                        <div class="project-meta-line">
+                            <span><i class="far fa-calendar-alt"></i> Aug 2024 – Ongoing</span>
+                            <span class="status-tag in-progress">In Progress</span>
                         </div>
                     </div>
-                    
-                    <!-- Awards Tab -->
-                    <div class="tab-pane" id="awards-tab">
-                        <div class="awards-showcase">
-                            <div class="achievement-card featured-achievement">
-                                <div class="achievement-header">
-                                    <div class="achievement-icon award">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <div class="achievement-title">
-                                        <h3>"Tech Wizard of the Year"</h3>
-                                        <span class="achievement-date">December 2024</span>
-                                    </div>
-                                </div>
-                                <div class="achievement-body">
-                                    <p class="achievement-description">Recognized for outstanding innovation, technical excellence, and leadership in developing software solutions that address real-world problems.</p>
-                                    <div class="achievement-quote">
-                                        <blockquote>
-                                            "Demonstrating exceptional technical skill and innovative thinking in creating impactful technology solutions."
-                                        </blockquote>
-                                        <cite>— Award Committee</cite>
-                                    </div>
-                                    <div class="achievement-tags">
-                                        <span class="activity-tag">Technical Excellence</span>
-                                        <span class="activity-tag">Innovation</span>
-                                        <span class="activity-tag">Leadership</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Add more awards here if you have any -->
+                </div>
+
+                <!-- Web Scraping Pipeline -->
+                <div class="project-featured carousel-slide">
+                    <div class="project-featured-img">
+                        <img src="{{ url_for('static', filename='images/ai_pipeline.png') }}" alt="Web Scraping Pipeline">
+                    </div>
+                    <div class="project-featured-body">
+                        <div class="project-featured-top">
+                            <h3>Automated Web Scraping Pipeline</h3>
+                            <a href="https://github.com/Anubhob435/Webscrapper-Ai-Analyzer" target="_blank" class="project-link-icon"><i class="fab fa-github"></i></a>
+                        </div>
+                        <p>Advanced data pipeline for automated web scraping with AI-powered reCAPTCHA bypass and multi-format data extraction.</p>
+                        <div class="project-metrics">
+                            <div class="metric"><span class="metric-val">99.9%</span><span class="metric-lbl">Uptime</span></div>
+                            <div class="metric"><span class="metric-val">10%</span><span class="metric-lbl">Faster Reads</span></div>
+                            <div class="metric"><span class="metric-val">7s</span><span class="metric-lbl">CAPTCHA Bypass</span></div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Python</span><span>Selenium</span><span>Scrapy</span><span>Beautiful Soup</span><span>TensorFlow</span>
+                        </div>
+                        <div class="project-meta-line">
+                            <span><i class="far fa-calendar-alt"></i> Aug – Sep 2024</span>
+                            <span class="status-tag completed">Completed</span>
                         </div>
                     </div>
-                    
-                    <!-- Interests Tab -->
-                    <div class="tab-pane" id="interests-tab">
-                        <div class="interests-showcase">
-                            <div class="interest-grid">
-                                <div class="interest-card">
-                                    <div class="interest-icon">
-                                        <i class="fas fa-chess-knight"></i>
-                                    </div>
-                                    <div class="interest-content">
-                                        <h4>Chess</h4>
-                                        <p>Founded a local chess club for seniors to promote mental acuity and community interaction. Regularly participate in tournaments and teach beginners.</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="interest-card">
-                                    <div class="interest-icon">
-                                        <i class="fas fa-book"></i>
-                                    </div>
-                                    <div class="interest-content">
-                                        <h4>Reading</h4>
-                                        <p>Avid reader of technical books, science fiction, and philosophy. Currently exploring works on artificial intelligence ethics and future technology trends.</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="interest-card">
-                                    <div class="interest-icon">
-                                        <i class="fas fa-hiking"></i>
-                                    </div>
-                                    <div class="interest-content">
-                                        <h4>Hiking</h4>
-                                        <p>Enjoy exploring nature trails and mountains. Completed several challenging treks and looking forward to more outdoor adventures.</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="interest-card">
-                                    <div class="interest-icon">
-                                        <i class="fas fa-laptop-code"></i>
-                                    </div>
-                                    <div class="interest-content">
-                                        <h4>Open Source</h4>
-                                        <p>Passionate about contributing to open-source projects that make technology more accessible and solve real-world problems.</p>
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+
+                <!-- MidPay -->
+                <div class="project-featured carousel-slide">
+                    <div class="project-featured-img">
+                        <img src="{{ url_for('static', filename='images/Midpay.png') }}" alt="MidPay">
+                    </div>
+                    <div class="project-featured-body">
+                        <div class="project-featured-top">
+                            <h3>MidPay — Blockchain Escrow System</h3>
+                            <a href="https://github.com/Anubhob435/midpay" target="_blank" class="project-link-icon"><i class="fab fa-github"></i></a>
+                        </div>
+                        <p>Blockchain-based escrow payment system with RSA-2048 encryption, proof-of-work consensus, and REST API for secure transactions.</p>
+                        <div class="project-metrics">
+                            <div class="metric"><span class="metric-val">RSA-2048</span><span class="metric-lbl">Encryption</span></div>
+                            <div class="metric"><span class="metric-val">REST</span><span class="metric-lbl">API</span></div>
+                            <div class="metric"><span class="metric-val">PoW</span><span class="metric-lbl">Blockchain</span></div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Python</span><span>Blockchain</span><span>Cryptography</span><span>Flask</span><span>REST API</span>
+                        </div>
+                        <div class="project-meta-line">
+                            <span><i class="far fa-calendar-alt"></i> Jan – May 2024</span>
+                            <span class="status-tag completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IPL Predictor -->
+                <div class="project-featured carousel-slide">
+                    <div class="project-featured-img">
+                        <img src="{{ url_for('static', filename='images/IPLpredictor.png') }}" alt="IPL Match Predictor">
+                    </div>
+                    <div class="project-featured-body">
+                        <div class="project-featured-top">
+                            <h3>IPL Match Outcome Predictor</h3>
+                            <a href="https://github.com/Anubhob435/ipl_predictor" target="_blank" class="project-link-icon"><i class="fab fa-github"></i></a>
+                        </div>
+                        <p>AI system predicting IPL match outcomes, scores, and key player performance using ML models and Gemini 2.0 AI explanations.</p>
+                        <div class="project-metrics">
+                            <div class="metric"><span class="metric-val">85%</span><span class="metric-lbl">Accuracy</span></div>
+                            <div class="metric"><span class="metric-val">2</span><span class="metric-lbl">ML Models</span></div>
+                            <div class="metric"><span class="metric-val">LLM</span><span class="metric-lbl">Insights</span></div>
+                        </div>
+                        <div class="project-tech">
+                            <span>Python</span><span>scikit-learn</span><span>XGBoost</span><span>Pandas</span><span>Gemini AI</span>
+                        </div>
+                        <div class="project-meta-line">
+                            <span><i class="far fa-calendar-alt"></i> Oct – Dec 2024</span>
+                            <span class="status-tag completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+                    </div> <!-- /.carousel-track -->
+                </div> <!-- /.carousel-viewport -->
+                <div class="carousel-controls">
+                    <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous project">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                    <div class="carousel-dots" id="carousel-dots"></div>
+                    <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next project">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            <h3 class="subsection-title fade-up"><i class="fab fa-github"></i> Other GitHub Repositories</h3>
+            <div class="github-repos" id="github-repos">
+                <div class="loading-placeholder">Loading repositories...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title fade-up">Education</h2>
+            <div class="edu-timeline">
+                <div class="edu-item fade-up">
+                    <div class="edu-dot current"></div>
+                    <div class="edu-card">
+                        <span class="edu-year">2022 – 2026</span>
+                        <h3>B.Tech in Computer Science & Engineering (AI & ML)</h3>
+                        <p class="edu-school"><i class="fas fa-university"></i> University of Engineering and Management, Kolkata</p>
+                        <p class="edu-detail"><strong>CGPA:</strong> 8.43 / 10</p>
+                        <div class="edu-courses">
+                            <span>Data Structures</span><span>Machine Learning</span><span>AI Algorithms</span>
+                            <span>Computer Vision</span><span>Deep Learning</span><span>Database Systems</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="edu-item fade-up">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-year">2020 – 2022</span>
+                        <h3>Senior Secondary (Science + CS)</h3>
+                        <p class="edu-school"><i class="fas fa-school"></i> B. D. M. International, Kolkata</p>
+                        <p class="edu-detail"><strong>Percentage:</strong> 76%</p>
+                    </div>
+                </div>
+                <div class="edu-item fade-up">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-year">2018 – 2020</span>
+                        <h3>Secondary</h3>
+                        <p class="edu-school"><i class="fas fa-school"></i> B. D. M. International, Kolkata</p>
+                        <p class="edu-detail"><strong>Percentage:</strong> 95%</p>
+                        <p class="edu-detail"><i class="fas fa-medal"></i> Science Fair Winner &bull; Math Olympiad Participant</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section id="certifications" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title fade-up">Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-card fade-up">
+                    <div class="cert-icon harvard"><i class="fas fa-university"></i></div>
+                    <div class="cert-body">
+                        <h4>CS50x: Introduction to Computer Science</h4>
+                        <p class="cert-issuer">Harvard University &bull; June 2024</p>
+                        <div class="cert-tags"><span>C</span><span>Python</span><span>SQL</span><span>Web Dev</span></div>
+                    </div>
+                </div>
+                <div class="cert-card fade-up">
+                    <div class="cert-icon harvard"><i class="fas fa-university"></i></div>
+                    <div class="cert-body">
+                        <h4>CS50p: Python Programming</h4>
+                        <p class="cert-issuer">Harvard University &bull; October 2024</p>
+                        <div class="cert-tags"><span>Python</span><span>OOP</span><span>APIs</span><span>Libraries</span></div>
+                    </div>
+                </div>
+                <div class="cert-card fade-up">
+                    <div class="cert-icon udemy"><i class="fas fa-laptop-code"></i></div>
+                    <div class="cert-body">
+                        <h4>The Complete Web Development Bootcamp</h4>
+                        <p class="cert-issuer">Udemy &bull; November 2024</p>
+                        <div class="cert-tags"><span>HTML/CSS</span><span>JavaScript</span><span>React</span><span>Node.js</span></div>
+                    </div>
+                </div>
+                <div class="cert-card fade-up">
+                    <div class="cert-icon linkedin"><i class="fab fa-linkedin"></i></div>
+                    <div class="cert-body">
+                        <h4>Java Object Oriented Programming</h4>
+                        <p class="cert-issuer">LinkedIn Learning &bull; April 2024</p>
+                        <div class="cert-tags"><span>Java</span><span>OOP</span><span>Design Patterns</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LEADERSHIP / AWARDS / INTERESTS ===== -->
+    <section id="extras" class="section">
+        <div class="container">
+            <h2 class="section-title fade-up">Leadership, Awards & Interests</h2>
+            <div class="extras-tabs fade-up">
+                <button class="tab-btn active" data-tab="leadership">Leadership</button>
+                <button class="tab-btn" data-tab="awards">Awards</button>
+                <button class="tab-btn" data-tab="interests">Interests</button>
+            </div>
+            <div class="extras-content fade-up">
+                <div class="tab-panel active" id="panel-leadership">
+                    <div class="extras-grid">
+                        <div class="extra-card">
+                            <div class="extra-icon"><i class="fas fa-users"></i></div>
+                            <h4>Volunteer Teaching Assistant</h4>
+                            <p class="extra-org">Shiksha Sabke Liye NGO</p>
+                            <p>Mentored 50+ students in programming and computer science, making technology education accessible to underserved communities over 8 months.</p>
+                        </div>
+                        <div class="extra-card">
+                            <div class="extra-icon"><i class="fas fa-leaf"></i></div>
+                            <h4>Climate Action Fundraising Lead</h4>
+                            <p class="extra-org">Green (R)evolution Organization</p>
+                            <p>Led fundraising initiatives for climate change awareness, coordinating volunteers for events and outreach programs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" id="panel-awards">
+                    <div class="extras-grid">
+                        <div class="extra-card">
+                            <div class="extra-icon"><i class="fas fa-trophy"></i></div>
+                            <h4>"Tech Wizard of the Year"</h4>
+                            <p class="extra-org">December 2024</p>
+                            <p>Recognized for outstanding innovation, technical excellence, and leadership in developing software solutions addressing real-world problems.</p>
+                            <blockquote>"Demonstrating exceptional technical skill and innovative thinking in creating impactful technology solutions."</blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" id="panel-interests">
+                    <div class="extras-grid grid-4">
+                        <div class="extra-card mini">
+                            <i class="fas fa-chess-knight"></i>
+                            <h4>Chess</h4>
+                            <p>Founded a local chess club for seniors. Regular tournament participant.</p>
+                        </div>
+                        <div class="extra-card mini">
+                            <i class="fas fa-book"></i>
+                            <h4>Reading</h4>
+                            <p>Tech books, sci-fi, and AI ethics. Always curious.</p>
+                        </div>
+                        <div class="extra-card mini">
+                            <i class="fas fa-hiking"></i>
+                            <h4>Hiking</h4>
+                            <p>Exploring nature trails and mountains whenever possible.</p>
+                        </div>
+                        <div class="extra-card mini">
+                            <i class="fas fa-code-branch"></i>
+                            <h4>Open Source</h4>
+                            <p>Contributing to projects that make tech more accessible.</p>
                         </div>
                     </div>
                 </div>
@@ -1016,159 +607,106 @@
         </div>
     </section>
 
-    <!-- Join Me Section -->
-    <section id="joinme" class="section">
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section section-alt">
         <div class="container">
-            <div class="section-header-special">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="section-subtitle">Open for collaborations, freelance opportunities, or just a tech chat</p>
-            </div>
-            
-            <div class="connection-overview">
-                <div class="availability-indicator">
-                    <div class="availability-badge">
-                        <span class="pulse-dot"></span>
-                        <span class="availability-text">Available for new opportunities</span>
+            <h2 class="section-title fade-up">Let's Connect</h2>
+            <p class="section-subtitle fade-up">Open for collaborations, freelance work, or just a tech chat.</p>
+
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <div class="contact-availability">
+                        <span class="avail-dot"></span> Available for new opportunities
                     </div>
-                    <p class="availability-details">Currently accepting projects starting <strong>May 2025</strong></p>
-                </div>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <div class="card-header">
-                            <i class="fas fa-handshake"></i>
-                            <h3>Let's Build Something Amazing</h3>
-                        </div>
-                        
-                        <div class="contact-pitch">
-                            <p>Whether you need a custom solution for your business, technical consultation, or want to discuss potential collaborations, I'm just a message away.</p>
-                        </div>
-                        
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <i class="fas fa-phone-alt"></i>
-                                <div>
-                                    <h4>Phone</h4>
-                                    <p>+91 8583005957</p>
-                                    <span class="best-time">Best time: 10am - 6pm IST</span>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <div>
-                                    <h4>Email</h4>
-                                    <p><a href="mailto:anubhob.dey2022@uem.edu.in">anubhob435@gmail.com</a></p>
-                                    <span class="response-time">I trypically reply instantly</span>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div>
-                                    <h4>Location</h4>
-                                    <p>Kolkata, West Bengal, India</p>
-                                    <span class="timezone">Timezone: UTC+5:30</span>
-                                </div>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>+91 8583005957</p>
                             </div>
                         </div>
-                        
-                        <div class="preferred-projects">
-                            <h4><i class="fas fa-star"></i> Preferred Project Types</h4>
-                            <div class="project-tags">
-                                <span class="project-tag">Web Applications</span>
-                                <span class="project-tag">Data Engineering</span>
-                                <span class="project-tag">AI Integration</span>
-                                <span class="project-tag">Process Automation</span>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p><a href="mailto:anubhob435@gmail.com">anubhob435@gmail.com</a></p>
                             </div>
                         </div>
-                        
-                        <div class="contact-social">
-                            <h4>Connect With Me</h4>
-                            <div class="social-links">
-                                <a href="#" class="social-link" title="GitHub Profile"><i class="fab fa-github"></i></a>
-                                <a href="#" class="social-link" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#" class="social-link" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="social-link" title="Dev.to Blog"><i class="fab fa-dev"></i></a>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Location</strong>
+                                <p>Kolkata, West Bengal, India</p>
                             </div>
                         </div>
                     </div>
+                    <div class="contact-socials">
+                        <a href="https://github.com/Anubhob435" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/anubhob-dey-05702714b/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:anubhob435@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    <div class="preferred-work">
+                        <strong>Preferred Work</strong>
+                        <div class="pw-tags">
+                            <span>Web Apps</span><span>Data Engineering</span><span>AI Integration</span><span>Automation</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="collaboration-cards">
-                <div class="collab-card">
-                    <div class="collab-icon"><i class="fas fa-code-branch"></i></div>
-                    <h3>Open Source</h3>
-                    <p>I'm passionate about contributing to open source. If you have a project that needs contributors, let's talk!</p>
-                </div>
-                <div class="collab-card">
-                    <div class="collab-icon"><i class="fas fa-users"></i></div>
-                    <h3>Mentorship</h3>
-                    <p>Interested in learning programming or data engineering? I'm open to mentoring opportunities.</p>
-                </div>
-                <div class="collab-card">
-                    <div class="collab-icon"><i class="fas fa-lightbulb"></i></div>
-                    <h3>Innovation</h3>
-                    <p>Have a challenging technical problem? I enjoy tackling unique problems with creative solutions.</p>
-                </div>
-            </div>
-            
-            <div class="testimonials-preview">
-                <div class="testimonial-quote">
-                    <i class="fas fa-quote-left"></i>
-                    <blockquote>Anubhob's technical skills and problem-solving abilities are outstanding.</blockquote>
-                    <cite>— Project Manager at Legal Gini</cite>
-                </div>
-            </div>
-            
-            <div class="cta-final">
-                <a href="{{ url_for('static', filename='images/anubhob_dey_cv3.pdf') }}" class="btn outline-btn" target="_blank">
-                    <i class="fas fa-file-download"></i> Download Resume
-                </a>
+                <form class="contact-form fade-up" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    <p class="form-response hidden" id="form-response"></p>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; {{ year }} Anubhob. All rights reserved.</p>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; {{ year }} Anubhob Dey. All rights reserved.</p>
+            <a href="{{ url_for('static', filename='images/anubhob_dey_cv3.pdf') }}" class="btn btn-ghost btn-sm" download><i class="fas fa-download"></i> Resume</a>
         </div>
     </footer>
 
-    <!-- Chat Widget -->
-    <div class="chat-container">
-        <div id="chat-bubble" class="chat-bubble">
-            <img src="{{ url_for('static', filename='images/chat_icon_light.png') }}" alt="Chat" class="chat-bubble-icon light-mode-icon">
-            <img src="{{ url_for('static', filename='images/chat_icon_dark.png') }}" alt="Chat" class="chat-bubble-icon dark-mode-icon">
-        </div>
-
-        <div id="chat-window" class="chat-window">
-            <div class="chat-header">
-                <h3>Chat with me</h3>
-                <button id="close-chat" class="close-chat">
-                    <i class="fas fa-times"></i>
-                </button>
+    <!-- ===== CHAT WIDGET ===== -->
+    <div class="chat-widget">
+        <button class="chat-fab" id="chat-fab" aria-label="Open chat">
+            <i class="fas fa-comment-dots"></i>
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="chat-box" id="chat-box">
+            <div class="chat-box-header">
+                <h4><i class="fas fa-robot"></i> Anubhob's AI</h4>
+                <button class="chat-close" id="chat-close"><i class="fas fa-times"></i></button>
             </div>
-            <div class="chat-body">
-                <div class="chat-messages" id="chat-messages">
-                    <div class="message bot-message">
-                        <div class="message-content">
-                            Hi! I'm Anubhob's AI assistant. How can I help you today?
-                        </div>
-                    </div>
-                </div>
-                <div class="chat-input-container">
-                    <input type="text" id="chat-input" placeholder="Type your message..." maxlength="500">
-                    <button id="send-message">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="msg msg-bot">Hi! I'm Anubhob's AI assistant. How can I help you today?</div>
+            </div>
+            <div class="chat-input-wrap">
+                <input type="text" id="chat-input" placeholder="Ask me anything..." maxlength="500">
+                <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

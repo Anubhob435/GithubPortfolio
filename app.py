@@ -7,46 +7,43 @@ from dotenv import load_dotenv
 import uuid
 from pymongo import MongoClient
 
-# Load environment variables
 load_dotenv()
 
-# Initialize MongoDB
-client = MongoClient(os.getenv('MONGODB_URI'))
-db = client['chatbot_db']
-conversations_collection = db['conversations']
+# MongoDB setup
+try:
+    client = MongoClient(os.getenv('MONGODB_URI'), serverSelectionTimeoutMS=3000)
+    db = client['chatbot_db']
+    conversations = db['conversations']
+except Exception:
+    conversations = None
 
 app = Flask(__name__)
+
 
 class GeminiChat:
     def __init__(self):
         self.api_key = os.getenv('GEMINI_API_KEY')
-        if not self.api_key:
-            print("⚠️ Warning: GEMINI_API_KEY not found. Falling back to predefined responses.")
-            self.api_available = False
-        else:
-            self.api_available = True
-            
-        self.base_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent"
+        self.api_available = bool(self.api_key)
+        self.base_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
         self.headers = {
             'x-goog-api-key': self.api_key,
             'Content-Type': 'application/json'
         } if self.api_available else None
-        
-        # Portfolio context for better responses
-        self.system_prompt = """You are Anubhob's AI assistant on his portfolio website. You should provide helpful, friendly, and informative responses about Anubhob Dey and his work. Here's what you should know about him:
 
-ABOUT ANUBHOB:
-- Data Engineer currently working on AI model training at Legal Gini (Remote, Jan 2025 - Present)
-- Graduate from University of Engineering & Management (UEM)
-- Specializes in Python, Machine Learning, Web Development, and Data Engineering
+        self.system_prompt = """You are Anubhob's AI assistant on his portfolio website. Be helpful, friendly, and concise.
 
-KEY PROJECTS:
-1. TrackBeez - GPS tracking system for school bus safety with real-time monitoring
-2. Automated Web Scraping Pipeline - AI-powered data collection with reCAPTCHA bypass
-3. MidPay - Blockchain-based escrow payment system with RSA encryption
-4. IPL Match Predictor - ML-based cricket match outcome prediction with 85% accuracy
+ABOUT ANUBHOB DEY:
+- Data Engineer for AI Model Training at Legal Gini (Remote, Jan 2025 – Present)
+- B.Tech CSE (AI & ML) at University of Engineering & Management (UEM), Kolkata — CGPA 8.43, graduating 2026
+- Based in Kolkata, West Bengal, India
 
-TECHNICAL SKILLS:
+PROJECTS:
+1. TrackBeez — Real-time GPS tracking for school bus safety (Google Cloud, React, Node.js, TensorFlow) — 40ms latency, 50+ users
+2. Automated Web Scraping Pipeline — AI-powered data collection with reCAPTCHA bypass (Python, Selenium, Scrapy, BeautifulSoup) — 99.9% uptime
+3. MidPay — Blockchain escrow payment system with RSA-2048 encryption (Python, Flask, REST API)
+4. IPL Match Predictor — ML-based match prediction with 85% accuracy (scikit-learn, XGBoost, Pandas, Gemini AI)
+
+SKILLS:
 - Languages: Python, Java, C, JavaScript, SQL
 - ML/AI: TensorFlow, scikit-learn, Computer Vision, OpenCV
 - Web: React, Flask, Node.js, HTML/CSS, RESTful APIs
@@ -54,215 +51,188 @@ TECHNICAL SKILLS:
 - Cloud: Google Cloud, Azure, AWS S3, Docker
 - Other: Git, Automation, Data Pipeline Design, System Architecture
 
-CERTIFICATIONS:
-- Harvard CS50x: Introduction to Computer Science
-- Harvard CS50p: Python Programming
-- Udemy Web Development Bootcamp
-- LinkedIn Java OOP
+CERTIFICATIONS: Harvard CS50x, Harvard CS50p, Udemy Web Dev Bootcamp, LinkedIn Java OOP
 
-CONTACT:
-- Email: anubhob435@gmail.com
-- LinkedIn: /in/anubhob-dey-05702714b/
-- GitHub: /Anubhob435
-- Phone: +91 8583005957
-- Location: Kolkata, West Bengal, India
+CONTACT: anubhob435@gmail.com | +91 8583005957 | LinkedIn: /in/anubhob-dey-05702714b/ | GitHub: /Anubhob435
 
-Keep responses conversational, helpful, and focused on Anubhob's professional profile. If asked about something not related to Anubhob or his work, politely redirect the conversation back to his portfolio."""
+Keep responses conversational and focused on Anubhob's profile. If asked about unrelated topics, gently redirect."""
 
-    def get_gemini_response(self, user_message):
-        """Get response from Gemini API"""
+    def get_response(self, message):
         if not self.api_available:
             return None
-            
         try:
             payload = {
-                "contents": [
-                    {
-                        "parts": [
-                            {"text": f"{self.system_prompt}\n\nUser: {user_message}"}
-                        ]
-                    }
-                ]
+                "contents": [{
+                    "parts": [{"text": f"{self.system_prompt}\n\nUser: {message}"}]
+                }]
             }
-            
-            response = requests.post(
-                self.base_url,
-                headers=self.headers,
-                json=payload,
-                timeout=30
-            )
-            
-            if response.status_code == 200:
-                data = response.json()
-                if 'candidates' in data and len(data['candidates']) > 0:
-                    candidate = data['candidates'][0]
-                    if 'content' in candidate and 'parts' in candidate['content']:
-                        parts = candidate['content']['parts']
-                        if len(parts) > 0 and 'text' in parts[0]:
-                            return parts[0]['text'].strip()
-            
+            resp = requests.post(self.base_url, headers=self.headers, json=payload, timeout=30)
+            if resp.status_code == 200:
+                data = resp.json()
+                candidates = data.get('candidates', [])
+                if candidates:
+                    parts = candidates[0].get('content', {}).get('parts', [])
+                    if parts and 'text' in parts[0]:
+                        return parts[0]['text'].strip()
         except Exception as e:
             print(f"Gemini API error: {e}")
-            
         return None
 
-# Initialize Gemini chat
-gemini_chat = GeminiChat()
+
+gemini = GeminiChat()
+
+FALLBACK_RESPONSES = {
+    'greeting': [
+        "Hello! I'm Anubhob's AI assistant. Ask me about his skills, projects, or experience!",
+        "Hi there! Welcome to Anubhob's portfolio. What would you like to know?",
+    ],
+    'projects': [
+        "Anubhob's key projects: TrackBeez (GPS tracking), AI Web Scraping Pipeline, MidPay (blockchain escrow), and IPL Predictor (85% ML accuracy). Check the Projects section for details!",
+    ],
+    'skills': [
+        "Tech stack: Python, Java, JS, React, Flask, Node.js, TensorFlow, Docker, GCP, Azure, AWS, MongoDB, MySQL. Full breakdown in the Skills section!",
+    ],
+    'contact': [
+        "Reach Anubhob at anubhob435@gmail.com | +91 8583005957 | LinkedIn: /in/anubhob-dey-05702714b/ | GitHub: /Anubhob435",
+    ],
+    'education': [
+        "B.Tech CSE (AI & ML) at UEM Kolkata, CGPA 8.43, graduating 2026. Plus Harvard CS50x, CS50p, and more certifications!",
+    ],
+    'experience': [
+        "Currently Data Engineer at Legal Gini (Jan 2025–Present) — building data pipelines, web scrapers, and AWS S3 integrations for AI model training.",
+    ],
+}
+
+
+def get_fallback(message):
+    msg = message.lower()
+    if any(w in msg for w in ['hello', 'hi', 'hey']):
+        cat = 'greeting'
+    elif any(w in msg for w in ['project', 'trackbeez', 'ipl', 'midpay', 'scraping']):
+        cat = 'projects'
+    elif any(w in msg for w in ['skill', 'tech', 'python', 'react', 'flask']):
+        cat = 'skills'
+    elif any(w in msg for w in ['contact', 'email', 'phone', 'linkedin']):
+        cat = 'contact'
+    elif any(w in msg for w in ['education', 'university', 'uem', 'cs50']):
+        cat = 'education'
+    elif any(w in msg for w in ['experience', 'job', 'legal gini', 'work']):
+        cat = 'experience'
+    else:
+        return "I can tell you about Anubhob's projects, skills, education, experience, or contact info. What interests you?"
+    responses = FALLBACK_RESPONSES[cat]
+    return responses[hash(message) % len(responses)]
+
 
 @app.route('/')
 def index():
     return render_template('index.html', year=datetime.now().year)
+
+
+@app.route('/get_projects')
+def get_projects():
+    try:
+        resp = requests.get('https://api.github.com/users/Anubhob435/repos', timeout=10)
+        if resp.status_code == 200:
+            repos = resp.json()
+            projects = [{
+                'name': r['name'],
+                'description': r['description'] or 'No description available',
+                'url': r['html_url'],
+                'stars': r['stargazers_count'],
+                'language': r['language'],
+                'updated_at': r['updated_at'],
+            } for r in repos if not r['fork']]
+            return jsonify(projects)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    return jsonify({'error': 'Failed to fetch repositories'}), 500
+
+
+@app.route('/github_stats')
+def github_stats():
+    username = 'Anubhob435'
+    try:
+        # Fetch user profile for public_repos count
+        user_resp = requests.get(f'https://api.github.com/users/{username}', timeout=10)
+        repos_count = 0
+        if user_resp.status_code == 200:
+            repos_count = user_resp.json().get('public_repos', 0)
+
+        # Fetch all repos to sum stars
+        total_stars = 0
+        page = 1
+        while True:
+            repos_resp = requests.get(
+                f'https://api.github.com/users/{username}/repos?per_page=100&page={page}',
+                timeout=10
+            )
+            if repos_resp.status_code != 200:
+                break
+            repos = repos_resp.json()
+            if not repos:
+                break
+            total_stars += sum(r.get('stargazers_count', 0) for r in repos)
+            page += 1
+
+        # Fetch contributions from GitHub contributions API
+        total_contribs = 0
+        try:
+            contrib_resp = requests.get(
+                f'https://github-contributions-api.jogruber.de/v4/{username}?y=last',
+                timeout=10
+            )
+            if contrib_resp.status_code == 200:
+                contrib_data = contrib_resp.json()
+                total_contribs = contrib_data.get('total', {}).get('last', 0)
+        except Exception:
+            total_contribs = 0
+
+        return jsonify({
+            'repos': repos_count,
+            'stars': total_stars,
+            'contributions': total_contribs
+        })
+    except Exception as e:
+        return jsonify({'repos': 0, 'stars': 0, 'contributions': 0})
+
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     name = request.form.get('name')
     email = request.form.get('email')
     message = request.form.get('message')
-    
-    # Here you would typically save this to a database or send an email
-    # For now, we'll just return a success message
-    return jsonify({'success': True, 'message': 'Form submitted successfully!'})
+    if not all([name, email, message]):
+        return jsonify({'success': False, 'message': 'All fields are required.'})
+    return jsonify({'success': True, 'message': 'Message sent! I\'ll get back to you soon.'})
 
-@app.route('/get_projects')
-def get_projects():
-    # Replace with your GitHub username
-    username = 'Anubhob435'
-    
-    # GitHub API to fetch user repositories
-    url = f'https://api.github.com/users/{username}/repos'
-    
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            repos = response.json()
-            # Filter out relevant information
-            projects = []
-            for repo in repos:
-                if not repo['fork']:  # Exclude forked repositories
-                    projects.append({
-                        'name': repo['name'],
-                        'description': repo['description'] or 'No description available',
-                        'url': repo['html_url'],
-                        'stars': repo['stargazers_count'],
-                        'language': repo['language']
-                    })
-            return jsonify(projects)
-        else:
-            return jsonify({'error': 'Failed to fetch repositories'}), 500
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get('message', '').strip()
-    
     if not user_message:
         return jsonify({'response': 'Please ask me something about Anubhob!'})
-    
-    # Get user information for MongoDB storage
-    user_ip = request.environ.get('HTTP_X_FORWARDED_FOR', request.environ.get('REMOTE_ADDR', 'unknown'))
+
     session_id = request.json.get('session_id', str(uuid.uuid4()))
-    group_id = request.json.get('group_id', 'portfolio_chat')
-    
-    # Try to get Gemini response first
-    gemini_response = gemini_chat.get_gemini_response(user_message)
-    
-    bot_response = ""
-    
-    if gemini_response:
-        bot_response = gemini_response
-    else:
-        # Fallback to predefined responses if Gemini is unavailable
-        user_message_lower = user_message.lower()
-        
-        # Enhanced bot responses with more context about Anubhob
-        responses = {
-            'greeting': [
-                "Hello! I'm Anubhob's AI assistant. I can help you learn about his skills, projects, and experience. What would you like to know?",
-                "Hi there! Welcome to Anubhob's portfolio. Feel free to ask me about his technical background, projects, or how to get in touch!",
-                "Hey! I'm here to help you navigate through Anubhob's portfolio. Ask me anything about his work!"
-            ],
-            'projects': [
-                "Anubhob has several impressive projects: 🚀 TrackBeez (GPS tracking for school buses), 🤖 AI Web Scraping Pipeline, 💳 MidPay (blockchain escrow system), and 🏏 IPL Predictor (85% accuracy ML model). Each showcases different technical skills!",
-                "His notable projects include real-time GPS tracking systems, AI-powered data pipelines, blockchain payment solutions, and machine learning prediction models. Check out the Projects section for detailed technical information!",
-                "From ML algorithms to full-stack applications, Anubhob's projects demonstrate expertise in Python, TensorFlow, React, blockchain, and cloud technologies. Each project solves real-world problems!"
-            ],
-            'skills': [
-                "Anubhob's technical stack: 🐍 Python, 🤖 ML (TensorFlow, scikit-learn), 🌐 Web Dev (React, Flask, Node.js), 📊 Data Engineering, ☁️ Cloud (GCP, Azure, AWS), and 🔗 Blockchain. Plus Java, C, JavaScript, and multiple databases!",
-                "He excels in full-stack development, machine learning, data pipeline design, computer vision, automation, and system architecture. His skills span from low-level programming to AI integration!",
-                "Core expertise includes Python automation, ML model development, web applications, database design (MongoDB, MySQL), cloud deployment, and API development. Check the Skills section for the complete breakdown!"
-            ],
-            'contact': [
-                "📧 anubhob435@gmail.com | 📱 +91 8583005957 | 💼 LinkedIn: /in/anubhob-dey-05702714b/ | 🐙 GitHub: /Anubhob435 | 📍 Kolkata, India (UTC+5:30). You can also use the contact form below!",
-                "Anubhob is actively seeking new opportunities and collaborations! Best to reach him via email (responds quickly) or LinkedIn. He's open to discussing projects, freelance work, or just tech conversations!",
-                "Available for projects starting May 2025. Connect through email, LinkedIn, or GitHub. He specializes in web applications, data engineering, AI integration, and process automation!"
-            ],
-            'education': [
-                "🎓 University of Engineering & Management (UEM) graduate with computer science focus. Enhanced his education with Harvard CS50x, CS50p Python certification, Udemy Web Dev Bootcamp, and LinkedIn Java OOP certification!",
-                "Strong academic foundation from UEM combined with continuous learning through prestigious online courses. His education spans theoretical CS concepts to practical implementation skills!",
-                "UEM provided the foundation, but Anubhob's self-directed learning through Harvard, Udemy, and hands-on projects shaped his diverse technical expertise across multiple domains!"
-            ],
-            'experience': [
-                "Currently Data Engineer for AI Model Training at Legal Gini (Jan 2025-Present). Works on data pipelines, web scraping automation, AWS S3 integration, and parallel processing for AI model development!",
-                "Professional experience in ML model development, full-stack web applications, data analysis, and automation. His projects demonstrate real-world application across multiple technology stacks!",
-                "From university projects to professional data engineering role, Anubhob has built end-to-end solutions including GPS tracking systems, payment platforms, prediction models, and data pipelines!"
-            ],
-            'resume': [
-                "📄 Download Anubhob's complete resume using the 'Download Resume' button! It contains detailed project descriptions, technical skills, certifications, and contact information in professional format!",
-                "His CV showcases all major projects, technical expertise, work experience at Legal Gini, educational background, and certifications. Perfect for understanding his complete professional profile!",
-                "The resume includes project metrics (like 85% ML accuracy, 40ms latency), technology stacks, and achievements. Use the download button in the header or contact section!"
-            ]
-        }
-        
-        # Determine response category
-        category = 'default'
-        
-        if any(word in user_message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
-            category = 'greeting'
-        elif any(word in user_message_lower for word in ['project', 'work', 'portfolio', 'trackbeez', 'ipl', 'midpay', 'scraping']):
-            category = 'projects'
-        elif any(word in user_message_lower for word in ['skill', 'technology', 'programming', 'language', 'python', 'ml', 'web', 'react', 'flask']):
-            category = 'skills'
-        elif any(word in user_message_lower for word in ['contact', 'email', 'reach', 'connect', 'linkedin', 'github', 'phone']):
-            category = 'contact'
-        elif any(word in user_message_lower for word in ['education', 'study', 'university', 'degree', 'uem', 'harvard', 'cs50']):
-            category = 'education'
-        elif any(word in user_message_lower for word in ['experience', 'background', 'career', 'work', 'job', 'legal', 'gini']):
-            category = 'experience'
-        elif any(word in user_message_lower for word in ['resume', 'cv', 'download']):
-            category = 'resume'
-        else:
-            # Default responses
-            default_responses = [
-                "I can help you learn about Anubhob's projects, technical skills, education, experience, or contact information. What interests you most?",
-                "Feel free to ask about: 🚀 Projects (TrackBeez, IPL Predictor, MidPay), 💻 Technical Skills, 🎓 Education, 💼 Work Experience, or 📞 How to Contact him!",
-                "I'd love to help! Try asking about his machine learning projects, web development work, data engineering experience, or the best way to get in touch!",
-                "You can ask about specific projects, his technical expertise (Python, ML, Web Dev), educational background (UEM + Harvard courses), or his current role as Data Engineer!"
-            ]
-            bot_response = default_responses[hash(user_message) % len(default_responses)]
-        
-        if category != 'default':
-            # Return response from appropriate category
-            category_responses = responses[category]
-            bot_response = category_responses[hash(user_message) % len(category_responses)]
-    
-    # Store conversation in MongoDB
-    try:
-        conversation_doc = {
-            'group_id': group_id,
-            'ip_address': user_ip,
-            'session_id': session_id,
-            'user_message': user_message,
-            'bot_response': bot_response,
-            'timestamp': datetime.utcnow(),
-            'source': 'gemini' if gemini_response else 'fallback'
-        }
-        conversations_collection.insert_one(conversation_doc)
-    except Exception as e:
-        print(f"Error storing conversation: {e}")
-        # Continue even if MongoDB storage fails
-    
+
+    bot_response = gemini.get_response(user_message) or get_fallback(user_message)
+
+    # Log to MongoDB
+    if conversations is not None:
+        try:
+            conversations.insert_one({
+                'session_id': session_id,
+                'ip': request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr),
+                'user_message': user_message,
+                'bot_response': bot_response,
+                'source': 'gemini' if gemini.get_response(user_message) else 'fallback',
+                'timestamp': datetime.utcnow(),
+            })
+        except Exception:
+            pass
+
     return jsonify({'response': bot_response, 'session_id': session_id})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
