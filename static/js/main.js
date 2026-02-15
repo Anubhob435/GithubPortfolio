@@ -18,14 +18,25 @@ document.addEventListener('DOMContentLoaded', () => {
     initTypewriter();
     initStats();
     initCarousel();
-    initSkillTabs();
+    initAllTabs();
     initExpertiseCarousel();
-    initTabs();
     initContactForm();
     initChat();
     initBackToTop();
     fetchGitHubRepos();
 });
+
+/* --- UTILITY: Throttle --- */
+function throttle(fn, wait) {
+    let last = 0;
+    return function(...args) {
+        const now = performance.now();
+        if (now - last >= wait) {
+            last = now;
+            fn.apply(this, args);
+        }
+    };
+}
 
 /* --- THEME --- */
 function initTheme() {
@@ -49,12 +60,26 @@ function initNav() {
     const toggle = document.getElementById('nav-toggle');
     const links = document.getElementById('nav-links');
     const scrollHint = document.getElementById('scroll-hint');
+    const sections = document.querySelectorAll('section[id]');
 
-    // Scroll effects
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-        if (scrollHint) scrollHint.classList.toggle('hide', window.scrollY > 300);
-    });
+    // Single throttled scroll handler for nav effects + active link
+    window.addEventListener('scroll', throttle(() => {
+        const scrollY = window.scrollY;
+        nav.classList.toggle('scrolled', scrollY > 50);
+        if (scrollHint) scrollHint.classList.toggle('hide', scrollY > 300);
+
+        // Active link on scroll
+        const scrollPos = scrollY + 120;
+        sections.forEach(sec => {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            const id = sec.getAttribute('id');
+            const link = links.querySelector(`a[href="#${id}"]`);
+            if (link) {
+                link.classList.toggle('active', scrollPos >= top && scrollPos < top + height);
+            }
+        });
+    }, 50), { passive: true });
 
     // Mobile toggle
     toggle.addEventListener('click', () => {
@@ -67,21 +92,6 @@ function initNav() {
         a.addEventListener('click', () => {
             toggle.classList.remove('active');
             links.classList.remove('open');
-        });
-    });
-
-    // Active link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-        const scrollPos = window.scrollY + 120;
-        sections.forEach(sec => {
-            const top = sec.offsetTop;
-            const height = sec.offsetHeight;
-            const id = sec.getAttribute('id');
-            const link = links.querySelector(`a[href="#${id}"]`);
-            if (link) {
-                link.classList.toggle('active', scrollPos >= top && scrollPos < top + height);
-            }
         });
     });
 }
@@ -141,7 +151,7 @@ function initTypewriter() {
     setTimeout(type, 800);
 }
 
-/* --- STATS ANIMATION (real GitHub data) --- */
+/* --- STATS ANIMATION --- */
 function initStats() {
     function animateNum(el, target, duration) {
         if (!el) return;
@@ -154,19 +164,8 @@ function initStats() {
         requestAnimationFrame(step);
     }
 
-    // Fetch real stats from backend
-    async function loadStats() {
-        try {
-            const res = await fetch('/github_stats');
-            const data = await res.json();
-            return data;
-        } catch {
-            return { repos: 0, stars: 0, contributions: 0 };
-        }
-    }
-
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(async entry => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
                 animateNum(document.getElementById('stat-repos'), 68, 1500);
                 animateNum(document.getElementById('stat-contribs'), 1827, 2000);
@@ -259,21 +258,28 @@ function initCarousel() {
     window.addEventListener('resize', () => goTo(current));
 }
 
-/* --- SKILL TABS --- */
-function initSkillTabs() {
-    const buttons = document.querySelectorAll('.skill-tab-btn');
-    if (!buttons.length) return;
-
-    buttons.forEach(btn => {
+/* --- ALL TABS (Skills + Leadership/Awards/Interests) --- */
+function initAllTabs() {
+    // Skills tabs
+    document.querySelectorAll('.skill-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            // Deactivate all
             document.querySelectorAll('.skill-tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.skill-tab-pane').forEach(p => p.classList.remove('active'));
-
-            // Activate clicked
             btn.classList.add('active');
             const target = document.getElementById(btn.dataset.target);
             if (target) target.classList.add('active');
+        });
+    });
+
+    // Leadership/Awards/Interests tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const parent = btn.closest('.section') || document;
+            parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            const panel = document.getElementById(`panel-${btn.dataset.tab}`);
+            if (panel) panel.classList.add('active');
         });
     });
 }
@@ -372,19 +378,7 @@ function initExpertiseCarousel() {
     });
 }
 
-/* --- TABS (Leadership/Awards/Interests) --- */
-function initTabs() {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const parent = btn.closest('.section') || document;
-            parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            const panel = document.getElementById(`panel-${btn.dataset.tab}`);
-            if (panel) panel.classList.add('active');
-        });
-    });
-}
+
 
 /* --- CONTACT FORM --- */
 function initContactForm() {
@@ -493,9 +487,9 @@ function initChat() {
 /* --- BACK TO TOP --- */
 function initBackToTop() {
     const btn = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
         btn.classList.toggle('show', window.scrollY > 500);
-    });
+    }, 100), { passive: true });
     btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
